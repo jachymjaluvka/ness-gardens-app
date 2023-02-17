@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		81377635299EA7810050E105 /* POI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81377634299EA7810050E105 /* POI.swift */; };
 		8196030B299AB4FC008EDC6D /* NessGardensApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8196030A299AB4FC008EDC6D /* NessGardensApp.swift */; };
 		8196030D299AB4FC008EDC6D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8196030C299AB4FC008EDC6D /* ContentView.swift */; };
 		8196030F299AB50A008EDC6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8196030E299AB50A008EDC6D /* Assets.xcassets */; };
@@ -14,6 +15,13 @@
 		8196031C299AB50A008EDC6D /* NessGardensTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8196031B299AB50A008EDC6D /* NessGardensTests.swift */; };
 		81960326299AB50A008EDC6D /* NessGardensUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81960325299AB50A008EDC6D /* NessGardensUITests.swift */; };
 		81960328299AB50A008EDC6D /* NessGardensUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81960327299AB50A008EDC6D /* NessGardensUITestsLaunchTests.swift */; };
+		81960336299AB659008EDC6D /* RoutesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81960335299AB659008EDC6D /* RoutesView.swift */; };
+		81960338299AB66B008EDC6D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81960337299AB66B008EDC6D /* SettingsView.swift */; };
+		8196033A299ABAA2008EDC6D /* POIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81960339299ABAA2008EDC6D /* POIView.swift */; };
+		8196033C299ABBBD008EDC6D /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8196033B299ABBBD008EDC6D /* MapView.swift */; };
+		8196033E299AC171008EDC6D /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8196033D299AC171008EDC6D /* RecordView.swift */; };
+		81960340299AC9A3008EDC6D /* RouteDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8196033F299AC9A3008EDC6D /* RouteDetailView.swift */; };
+		81FB4423299C0C5A006F5EFE /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FB4422299C0C5A006F5EFE /* Route.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		81377634299EA7810050E105 /* POI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POI.swift; sourceTree = "<group>"; };
 		81960307299AB4FC008EDC6D /* NessGardens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NessGardens.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8196030A299AB4FC008EDC6D /* NessGardensApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NessGardensApp.swift; sourceTree = "<group>"; };
 		8196030C299AB4FC008EDC6D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -44,6 +53,13 @@
 		81960321299AB50A008EDC6D /* NessGardensUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NessGardensUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		81960325299AB50A008EDC6D /* NessGardensUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NessGardensUITests.swift; sourceTree = "<group>"; };
 		81960327299AB50A008EDC6D /* NessGardensUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NessGardensUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		81960335299AB659008EDC6D /* RoutesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesView.swift; sourceTree = "<group>"; };
+		81960337299AB66B008EDC6D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		81960339299ABAA2008EDC6D /* POIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POIView.swift; sourceTree = "<group>"; };
+		8196033B299ABBBD008EDC6D /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		8196033D299AC171008EDC6D /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
+		8196033F299AC9A3008EDC6D /* RouteDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDetailView.swift; sourceTree = "<group>"; };
+		81FB4422299C0C5A006F5EFE /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +110,8 @@
 		81960309299AB4FC008EDC6D /* NessGardens */ = {
 			isa = PBXGroup;
 			children = (
+				81FB4421299C0C35006F5EFE /* Models */,
+				81960334299AB63A008EDC6D /* Views */,
 				8196030A299AB4FC008EDC6D /* NessGardensApp.swift */,
 				8196030C299AB4FC008EDC6D /* ContentView.swift */,
 				8196030E299AB50A008EDC6D /* Assets.xcassets */,
@@ -125,6 +143,28 @@
 				81960327299AB50A008EDC6D /* NessGardensUITestsLaunchTests.swift */,
 			);
 			path = NessGardensUITests;
+			sourceTree = "<group>";
+		};
+		81960334299AB63A008EDC6D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				81960335299AB659008EDC6D /* RoutesView.swift */,
+				81960337299AB66B008EDC6D /* SettingsView.swift */,
+				81960339299ABAA2008EDC6D /* POIView.swift */,
+				8196033B299ABBBD008EDC6D /* MapView.swift */,
+				8196033D299AC171008EDC6D /* RecordView.swift */,
+				8196033F299AC9A3008EDC6D /* RouteDetailView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		81FB4421299C0C35006F5EFE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				81FB4422299C0C5A006F5EFE /* Route.swift */,
+				81377634299EA7810050E105 /* POI.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,7 +297,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81FB4423299C0C5A006F5EFE /* Route.swift in Sources */,
 				8196030D299AB4FC008EDC6D /* ContentView.swift in Sources */,
+				8196033C299ABBBD008EDC6D /* MapView.swift in Sources */,
+				81960338299AB66B008EDC6D /* SettingsView.swift in Sources */,
+				8196033E299AC171008EDC6D /* RecordView.swift in Sources */,
+				81960336299AB659008EDC6D /* RoutesView.swift in Sources */,
+				81377635299EA7810050E105 /* POI.swift in Sources */,
+				81960340299AC9A3008EDC6D /* RouteDetailView.swift in Sources */,
+				8196033A299ABAA2008EDC6D /* POIView.swift in Sources */,
 				8196030B299AB4FC008EDC6D /* NessGardensApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -419,6 +467,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"NessGardens/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -447,6 +496,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"NessGardens/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
