@@ -23,7 +23,7 @@ struct ContentView: View {
             
             RecordView()
                 .tabItem{
-                    Label("Record", systemImage: "record.circle")
+                    Label("Record", systemImage: "plus.app")
                 }.tag("record")
             
             POIView()
