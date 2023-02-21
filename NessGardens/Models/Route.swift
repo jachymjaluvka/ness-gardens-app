@@ -16,10 +16,10 @@ enum Output{
 
 
 class Route: Identifiable {
-    let id = UUID()
-    var name: String
-    var description: String
-    var distance: Float
+    public let id: UUID = UUID()
+    public var name: String
+    public var description: String
+    public var distance: Float
     
     init(name: String, description: String, distance: Float){
         self.name = name

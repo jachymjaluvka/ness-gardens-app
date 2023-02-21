@@ -21,6 +21,8 @@
 		8196033C299ABBBD008EDC6D /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8196033B299ABBBD008EDC6D /* MapView.swift */; };
 		8196033E299AC171008EDC6D /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8196033D299AC171008EDC6D /* RecordView.swift */; };
 		81960340299AC9A3008EDC6D /* RouteDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8196033F299AC9A3008EDC6D /* RouteDetailView.swift */; };
+		81AB709A299FBF6B0063164C /* POIDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB7099299FBF6B0063164C /* POIDetailView.swift */; };
+		81AB709C299FE0C30063164C /* AddPOIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB709B299FE0C30063164C /* AddPOIView.swift */; };
 		81FB4423299C0C5A006F5EFE /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FB4422299C0C5A006F5EFE /* Route.swift */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +61,8 @@
 		8196033B299ABBBD008EDC6D /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		8196033D299AC171008EDC6D /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
 		8196033F299AC9A3008EDC6D /* RouteDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDetailView.swift; sourceTree = "<group>"; };
+		81AB7099299FBF6B0063164C /* POIDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POIDetailView.swift; sourceTree = "<group>"; };
+		81AB709B299FE0C30063164C /* AddPOIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPOIView.swift; sourceTree = "<group>"; };
 		81FB4422299C0C5A006F5EFE /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -148,14 +152,32 @@
 		81960334299AB63A008EDC6D /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				81960335299AB659008EDC6D /* RoutesView.swift */,
+				81AB7098299FBF4C0063164C /* POIViews */,
+				81AB7097299FBF060063164C /* RouteViews */,
 				81960337299AB66B008EDC6D /* SettingsView.swift */,
-				81960339299ABAA2008EDC6D /* POIView.swift */,
 				8196033B299ABBBD008EDC6D /* MapView.swift */,
 				8196033D299AC171008EDC6D /* RecordView.swift */,
-				8196033F299AC9A3008EDC6D /* RouteDetailView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		81AB7097299FBF060063164C /* RouteViews */ = {
+			isa = PBXGroup;
+			children = (
+				81960335299AB659008EDC6D /* RoutesView.swift */,
+				8196033F299AC9A3008EDC6D /* RouteDetailView.swift */,
+			);
+			path = RouteViews;
+			sourceTree = "<group>";
+		};
+		81AB7098299FBF4C0063164C /* POIViews */ = {
+			isa = PBXGroup;
+			children = (
+				81960339299ABAA2008EDC6D /* POIView.swift */,
+				81AB7099299FBF6B0063164C /* POIDetailView.swift */,
+				81AB709B299FE0C30063164C /* AddPOIView.swift */,
+			);
+			path = POIViews;
 			sourceTree = "<group>";
 		};
 		81FB4421299C0C35006F5EFE /* Models */ = {
@@ -301,8 +323,10 @@
 				8196030D299AB4FC008EDC6D /* ContentView.swift in Sources */,
 				8196033C299ABBBD008EDC6D /* MapView.swift in Sources */,
 				81960338299AB66B008EDC6D /* SettingsView.swift in Sources */,
+				81AB709A299FBF6B0063164C /* POIDetailView.swift in Sources */,
 				8196033E299AC171008EDC6D /* RecordView.swift in Sources */,
 				81960336299AB659008EDC6D /* RoutesView.swift in Sources */,
+				81AB709C299FE0C30063164C /* AddPOIView.swift in Sources */,
 				81377635299EA7810050E105 /* POI.swift in Sources */,
 				81960340299AC9A3008EDC6D /* RouteDetailView.swift in Sources */,
 				8196033A299ABAA2008EDC6D /* POIView.swift in Sources */,
