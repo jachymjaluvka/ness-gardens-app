@@ -9,8 +9,9 @@ import SwiftUI
 
 struct POIView: View {
     var pois = [POI(name: "Albert Dock",
-                    description: "Dock located in Liverpool, with historical significance",
-                    latitude: 53.4003, longitude: -2.9927,
+                    description: "The Royal Albert Dock is a complex of dock buildings and warehouses in Liverpool, England. Designed by Jesse Hartley and Philip Hardwick, it was opened in 1846, and was the first structure in Britain to be built from cast iron, brick and stone, with no structural wood. As a result, it was the first non-combustible warehouse system in the world. It was known simply as the Albert Dock until 2018, when it was granted a royal charter and had the honorific \"Royal\" added to its name.\n",
+                    latitude: 12.9876,
+                    longitude: 3.14159,
                     image: "albert-dock"),
                 POI(name: "Cavern Club",
                     description: "Club in Liverpool where the Beatles have started their career",
@@ -35,7 +36,7 @@ struct POIView: View {
                     }
                 }
             }
-            .navigationTitle("Points of Interest")
+            .navigationTitle("POIs")
         }
     }
 }
