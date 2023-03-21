@@ -13,22 +13,24 @@ struct POIDetailView: View {
     var poi: POI
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            
-            Text(poi.name)
-                .font(.title)
-                .fontWeight(.semibold)
-                .padding(.horizontal)
+        VStack(alignment: .leading) {
             
             if poi.imagePath != nil {
                 Image(poi.imagePath!)
                     .resizable()
                     .scaledToFit()
             }
+            Text("Description")
+                .padding([.top, .leading, .trailing])
+                .navigationTitle(poi.name)
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar{
+                    Button("Edit", action: edit)
+                }
+                .font(.headline)
             
-            Text(poi.description)
-                .fontWeight(.semibold)
-                .padding(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/)
+            Text(poi.description).padding(.horizontal)
+                
                 
                 
             
@@ -51,12 +53,10 @@ struct POIDetailView: View {
             Spacer()
             Button("Edit", role: .none, action: edit)
                 .buttonStyle(.borderedProminent)
-                .controlSize(.large)
                 .fontWeight(.semibold)
             
             Button("Delete", role: .destructive, action: delete)
                 .buttonStyle(.borderedProminent)
-                .controlSize(.large)
                 .fontWeight(.semibold)
             Spacer()
         }
