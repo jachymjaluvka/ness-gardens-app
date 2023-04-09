@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8116EAEC29C9F16800F8877C /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8116EAEB29C9F16800F8877C /* LocationManager.swift */; };
 		81377635299EA7810050E105 /* POI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81377634299EA7810050E105 /* POI.swift */; };
 		817A828029A5240800AE8C55 /* TimerPlayground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817A827F29A5240800AE8C55 /* TimerPlayground.swift */; };
 		8196030B299AB4FC008EDC6D /* NessGardensApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8196030A299AB4FC008EDC6D /* NessGardensApp.swift */; };
@@ -45,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8116EAEB29C9F16800F8877C /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		81377634299EA7810050E105 /* POI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POI.swift; sourceTree = "<group>"; };
 		817A827F29A5240800AE8C55 /* TimerPlayground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerPlayground.swift; sourceTree = "<group>"; };
 		81960307299AB4FC008EDC6D /* NessGardens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NessGardens.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -196,6 +198,7 @@
 			children = (
 				81FB4422299C0C5A006F5EFE /* Route.swift */,
 				81377634299EA7810050E105 /* POI.swift */,
+				8116EAEB29C9F16800F8877C /* LocationManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -340,6 +343,7 @@
 				81960336299AB659008EDC6D /* RoutesView.swift in Sources */,
 				81AB709C299FE0C30063164C /* AddPOIView.swift in Sources */,
 				81377635299EA7810050E105 /* POI.swift in Sources */,
+				8116EAEC29C9F16800F8877C /* LocationManager.swift in Sources */,
 				81960340299AC9A3008EDC6D /* RouteDetailView.swift in Sources */,
 				8196033A299ABAA2008EDC6D /* POIView.swift in Sources */,
 				8196030B299AB4FC008EDC6D /* NessGardensApp.swift in Sources */,
@@ -504,6 +508,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app requires location to use routes.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -533,6 +538,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app requires location to use routes.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

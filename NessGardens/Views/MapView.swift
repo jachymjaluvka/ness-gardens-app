@@ -9,19 +9,18 @@ import SwiftUI
 import MapKit
 
 struct MapView: View {
-    @State private var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(
-            latitude: 40.83834587046632,
-            longitude: 14.254053016537693
-        ),
-        span: MKCoordinateSpan(
-            latitudeDelta: 0.03,
-            longitudeDelta: 0.03
-        )
-    )
+    @StateObject private var locationManager = LocationManager()
+    @State var tracking: MapUserTrackingMode = .follow
     
     var body: some View {
-        Map(coordinateRegion: $region)
+        Map(coordinateRegion: $locationManager.region,
+            interactionModes: .all,
+            showsUserLocation: true,
+            userTrackingMode: $tracking)
+            .onAppear {
+                locationManager.locationServicesEnabled()
+            }
+            .edgesIgnoringSafeArea([.top, .leading, .trailing])
     }
 }
 
