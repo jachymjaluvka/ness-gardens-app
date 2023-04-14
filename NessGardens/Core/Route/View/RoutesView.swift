@@ -20,7 +20,7 @@ struct RoutesView: View {
                     RouteDetailView(route: route)
                 } label: {
                     HStack {
-                        Text(route.name).bold()
+                        Text(route.wrappedName).bold()
                         var routeDistance = String(format: "- %.2f km", route.distance)
                         Text(routeDistance)
                     }
@@ -44,6 +44,8 @@ struct RoutesView: View {
 
 struct RoutesView_Previews: PreviewProvider {
     static var previews: some View {
-        RoutesView().environmentObject(RoutesViewModel())
+        let dc = DataController()
+        RoutesView()
+            .environmentObject(RoutesViewModel(dataController: dc))
     }
 }

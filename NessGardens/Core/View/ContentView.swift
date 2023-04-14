@@ -26,7 +26,7 @@ struct HomeView: View {
                     Label("Record", systemImage: "plus.app")
                 }.tag("record")
             
-            POIView()
+            PointsView()
                 .tabItem {
                     Label("POIs", systemImage: "star")
                 }.tag("poi")
@@ -41,8 +41,9 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
+        let dc = DataController()
         HomeView()
-            .environmentObject(RoutesViewModel())
-            .environmentObject(POIViewModel())
+            .environmentObject(RoutesViewModel(dataController: dc))
+            .environmentObject(PointsViewModel(dataController: dc))
     }
 }

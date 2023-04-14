@@ -1,5 +1,5 @@
 //
-//  AddPOIView.swift
+//  AddPointView.swift
 //  NessGardens
 //
 //  Created by Jachym Jaluvka on 17.02.2023.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AddNewPOIView: View {
+struct AddNewPointView: View {
     @Environment(\.dismiss) var dismiss
     
     @State private var name = ""
@@ -16,7 +16,12 @@ struct AddNewPOIView: View {
     @State private var latitude = ""
     
     @EnvironmentObject var routesViewModel: RoutesViewModel
-    @State var selectedRoute = 0
+    @EnvironmentObject var pointsViewModel: PointsViewModel
+    @State private var selectedRoute: Route
+    
+    init(firstRoute: Route) {
+        _selectedRoute = State(initialValue: firstRoute)
+    }
     
     var body: some View {
         
@@ -31,15 +36,15 @@ struct AddNewPOIView: View {
                 }
                 
                 Section("Location"){
-                    TextField("Longitude", text: $longitute)
                     TextField("Latitude", text: $latitude)
+                    TextField("Longitude", text: $longitute)
                     Button("Use current location", action: useCurrentLocation)
                 }
                 
                 Section(header: Text("Route")) {
                     Picker(selection: $selectedRoute, label: Text("Routes")) {
-                        ForEach(0 ..< self.routesViewModel.allRoutes.count) { route in
-                            Text(self.routesViewModel.allRoutes[route].name).tag(route)
+                        ForEach(routesViewModel.allRoutes) { (route: Route) in
+                            Text(route.wrappedName)
                         }
                     }
                 }
@@ -59,12 +64,13 @@ struct AddNewPOIView: View {
                 }
             
             }
-            .navigationTitle("Add POI")
+            .navigationTitle("Add Point")
             .toolbar {
                 ToolbarItem(placement: .automatic){
                     Button("Close", action: close)
                 }
             }
+            .onAppear()
         }
     }
     
@@ -77,19 +83,24 @@ struct AddNewPOIView: View {
     }
     
     func save() -> Void {
-        print(selectedRoute)
+        
         dismiss()
     }
     
     func reset() -> Void {
-        selectedRoute = 0
+        selectedRoute = routesViewModel.allRoutes[0]
     }
 
 }
 
 struct AddNewPOIView_Previews: PreviewProvider {
     static var previews: some View {
-        let routesVM = RoutesViewModel()
-        AddNewPOIView().environmentObject(routesVM)
+        let dc = DataController()
+        let routesVM = RoutesViewModel(dataController: dc)
+        let pointsVM
+        
+        AddNewPointView(firstRoute: routesVM.allRoutes[0])
+            .environmentObject(routesVM)
+            .environmentObject(pointsVM)
     }
 }

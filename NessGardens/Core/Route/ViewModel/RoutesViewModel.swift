@@ -6,24 +6,35 @@
 //
 
 import Foundation
+import MapKit
 
 class RoutesViewModel: ObservableObject {
     
-    @Published public var allRoutes : Array<Route>
-    @Published public var filteredRoutes : Array<Route>
+    @Published public var allRoutes : [Route]
+    @Published public var filteredRoutes : [Route]
     
-    init() {
-        self.allRoutes = RoutesViewModel.getAllRoutes()
-        self.filteredRoutes = RoutesViewModel.getAllRoutes()
+    private var dc: DataController
+    
+    init(dataController: DataController) {
+        self.dc = dataController
+        self.allRoutes = dataController.fetchRoutes()
+        self.filteredRoutes = dataController.fetchRoutes()
     }
-
-    private static func getAllRoutes() -> Array<Route> {
-        return [Route(name: "First Route",
-                      description: "Some random first route",
-                      distance: 12.56),
-                Route(name: "Second Route",
-                      description: "Some random second route",
-                      distance: 15.32)
-        ]
+    
+    public func addNewRoute(name: String,
+                            summary: String,
+                            coordinates: [CLLocationCoordinate2D],
+                            type: String,
+                            difficulty: String
+    ) -> Void {
+        let newRoute = Route(context: dc.container.viewContext)
+        newRoute.id = UUID()
+        newRoute.name = name
+        newRoute.summary = summary
+        newRoute.coordinates = coordinates
+        newRoute.type = type
+        newRoute.difficulty = difficulty
+        dc.save()
+        allRoutes = dc.fetchRoutes()
     }
 }

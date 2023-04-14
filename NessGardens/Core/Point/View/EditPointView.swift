@@ -1,5 +1,5 @@
 //
-//  EditPOIView.swift
+//  EditPointView.swift
 //  NessGardens
 //
 //  Created by Jachym Jaluvka on 13.04.2023.
@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-struct EditPOIView: View {
+struct EditPointView: View {
     @Environment(\.dismiss) var dismiss
     
-    public var poi: POI
+    public var point: Point
     
     @State private var name: String
     @State private var description: String
@@ -20,12 +20,12 @@ struct EditPOIView: View {
     @EnvironmentObject var routesViewModel: RoutesViewModel
     @State var selectedRoute = 0
     
-    init(poi: POI) {
-        self.poi = poi
-        _name = State(initialValue: poi.name)
-        _description = State(initialValue: poi.description)
-        _latitude = State(initialValue: String(poi.coordinates.0))
-        _longitute = State(initialValue: String(poi.coordinates.1))
+    init(point: Point) {
+        self.point = point
+        _name = State(initialValue: point.wrappedName)
+        _description = State(initialValue: point.wrappedSummary)
+        _latitude = State(initialValue: String(point.latitude))
+        _longitute = State(initialValue: String(point.longitude))
     }
     
     var body: some View {
@@ -49,7 +49,7 @@ struct EditPOIView: View {
                 Section(header: Text("Route")) {
                     Picker(selection: $selectedRoute, label: Text("Routes")) {
                         ForEach(0 ..< self.routesViewModel.allRoutes.count) { route in
-                            Text(self.routesViewModel.allRoutes[route].name).tag(route)
+                            Text(self.routesViewModel.allRoutes[route].wrappedName).tag(route)
                         }
                     }
                 }
@@ -69,7 +69,7 @@ struct EditPOIView: View {
                 }
             
             }
-            .navigationTitle("Edit - \(poi.name)")
+            .navigationTitle("Edit - \(point.wrappedName)")
             .toolbar {
                 ToolbarItem(placement: .automatic){
                     Button("Close", action: close)
@@ -99,10 +99,12 @@ struct EditPOIView: View {
 
 struct EditPOIView_Previews: PreviewProvider {
     static var previews: some View {
-        EditPOIView(poi: POI(name: "Test POI",
-                             description: "Some longer string for description",
-                             latitude: 12.56754,
-                             longitude: 142.4647895)
-        ).environmentObject(RoutesViewModel())
+        let dc = DataController()
+        
+        let context = dc.container.viewContext
+        let testPoint = Point(context: context)
+        
+        EditPointView(point: testPoint)
+            .environmentObject(RoutesViewModel(dataController: dc))
     }
 }

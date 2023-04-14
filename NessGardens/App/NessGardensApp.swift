@@ -11,9 +11,10 @@ import SwiftUI
 struct NessGardensApp: App {
     var body: some Scene {
         WindowGroup {
+            let dc = DataController()
             HomeView()
-                .environmentObject(RoutesViewModel())
-                .environmentObject(POIViewModel())
+                .environmentObject(RoutesViewModel(dataController: dc))
+                .environmentObject(PointsViewModel(dataController: dc))
         }
     }
 }

@@ -10,6 +10,7 @@ import SwiftUI
 struct RecordButtonBarView: View {
     
     @State var recording = false
+    @State var showingAddRoute = false
     
     var body: some View {
         HStack {
@@ -53,7 +54,7 @@ struct RecordButtonBarView: View {
                 }.frame(width: 100, height: 50)
             }
             
-            Button(action: placeholder) {
+            Button(action: stop) {
                 VStack {
                     Image(systemName: "stop.fill")
                         .resizable()
@@ -66,11 +67,17 @@ struct RecordButtonBarView: View {
             }.frame(width: 100, height: 50)
             
             Spacer()
+        }.sheet(isPresented: $showingAddRoute) {
+            AddRouteView()
         }
     }
     
     func placeholder() -> Void {
         
+    }
+    
+    func stop() -> Void {
+        showingAddRoute.toggle()
     }
     
     func pressRecord() -> Void {
