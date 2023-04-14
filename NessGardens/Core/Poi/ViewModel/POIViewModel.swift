@@ -1,14 +1,24 @@
 //
-//  POIView.swift
+//  POIViewModel.swift
 //  NessGardens
 //
-//  Created by Jachym Jaluvka on 13.02.2023.
+//  Created by Jachym Jaluvka on 13.04.2023.
 //
 
-import SwiftUI
+import Foundation
 
-struct POIView: View {
-    var pois = [POI(name: "Albert Dock",
+class POIViewModel: ObservableObject {
+    @Published public var allPoints: [POI]
+    @Published public var filteredPoints: [POI]
+    
+    init() {
+        let points = POIViewModel.fetchAllPoints()
+        self.allPoints = points
+        self.filteredPoints = points
+    }
+    
+    private static func fetchAllPoints() -> [POI] {
+        return [POI(name: "Albert Dock",
                     description: "Dock located in Liverpool, with historical significance",
                     latitude: 53.4003, longitude: -2.9927,
                     image: "albert-dock"),
@@ -21,27 +31,6 @@ struct POIView: View {
                 POI(name: "Liverpool Cathedral",
                     description: "A historical cathedral in Liverpool, with a nice view of the city",
                     latitude: 53.391831766, longitude: -2.970496118)
-    ]
-    
-    var body: some View {
-        
-        NavigationStack {
-            List(pois) { poi in
-                NavigationLink {
-                    POIDetailView(poi: poi)
-                } label: {
-                    HStack {
-                        Text(poi.name).bold()
-                    }
-                }
-            }
-            .navigationTitle("Points of Interest")
-        }
-    }
-}
-
-struct POIView_Previews: PreviewProvider {
-    static var previews: some View {
-        POIView()
+        ]
     }
 }

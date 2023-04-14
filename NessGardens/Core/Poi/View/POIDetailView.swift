@@ -11,6 +11,7 @@ let testPOI = POI(name: "Albert Dock", description: "The Royal Albert Dock is a 
 
 struct POIDetailView: View {
     var poi: POI
+    @State var showingEdit: Bool = false
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -61,10 +62,14 @@ struct POIDetailView: View {
             Spacer()
         }
         .padding(/*@START_MENU_TOKEN@*/[.top, .leading, .trailing]/*@END_MENU_TOKEN@*/)
+        .fullScreenCover(isPresented: $showingEdit) {
+            EditPOIView(poi: poi)
+        }
     }
     
     func edit() -> Void {
         print("Editing POI!")
+        showingEdit.toggle()
     }
     
     func delete() -> Void{
@@ -76,5 +81,6 @@ struct POIDetailView_Previews: PreviewProvider {
     
     static var previews: some View {
         POIDetailView(poi: testPOI)
+            .environmentObject(RoutesViewModel())
     }
 }

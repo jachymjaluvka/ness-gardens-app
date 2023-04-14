@@ -13,14 +13,8 @@ struct MapView: View {
     @State var tracking: MapUserTrackingMode = .follow
     
     var body: some View {
-        Map(coordinateRegion: $locationManager.region,
-            interactionModes: .all,
-            showsUserLocation: true,
-            userTrackingMode: $tracking)
-            .onAppear {
-                locationManager.locationServicesEnabled()
-            }
-            .edgesIgnoringSafeArea([.top, .leading, .trailing])
+        MapViewRepresentable()
+            .ignoresSafeArea(edges: .top)
     }
 }
 

@@ -22,19 +22,24 @@ struct TimerPlayground: View {
     }()
     
     var body: some View {
-        Text(formatter.string(from: interval) ?? "")
-            .font(Font.system(.largeTitle, design: .monospaced))
-            .onReceive(timer) { _ in
-                if self.isTimerRunning {
-                    interval = Date().timeIntervalSince(startTime)
+        VStack {
+            Text(formatter.string(from: interval) ?? "")
+                .font(Font.system(.largeTitle, design: .monospaced))
+                .onReceive(timer) { _ in
+                    if self.isTimerRunning {
+                        interval = Date().timeIntervalSince(startTime)
+                    }
                 }
+                .onAppear() {
+                    if !isTimerRunning {
+                        startTime = Date()
+                        isTimerRunning.toggle()
+                    }
+                }
+            Button("Stop") {
+                isTimerRunning.toggle()
             }
-             .onAppear() {
-                 if !isTimerRunning {
-                     startTime = Date()
-                 }
-                 isTimerRunning.toggle()
-             }
+        }
     }
 }
 

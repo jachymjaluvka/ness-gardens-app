@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  HomeView.swift
 //  NessGardens
 //
 //  Created by Jachym Jaluvka on 13.02.2023.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct HomeView: View {
     @State private var selectedTab = "map"
     var body: some View {
         TabView(selection: $selectedTab) {
@@ -31,16 +31,18 @@ struct ContentView: View {
                     Label("POIs", systemImage: "star")
                 }.tag("poi")
             
-            SettingsView()
-                .tabItem{
-                    Label("Settings", systemImage: "slider.horizontal.3")
-                }.tag("settings")
+            TimerPlayground()
+                .tabItem {
+                    Label("Timer", systemImage: "slider.horizontal.3")
+                }.tag("timer")
         }
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        HomeView()
+            .environmentObject(RoutesViewModel())
+            .environmentObject(POIViewModel())
     }
 }

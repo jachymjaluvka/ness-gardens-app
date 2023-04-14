@@ -9,8 +9,6 @@ import Foundation
 
 
 class POI: Identifiable {
-    
-    public let id: UUID = UUID()
     public var name: String
     public var description: String
     public var coordinates: (Float, Float)
@@ -34,5 +32,20 @@ class POI: Identifiable {
         }else{
             return false
         }
+    }
+}
+
+extension POI: Hashable {
+    
+    var id: String {
+        return UUID().uuidString
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        return hasher.combine(id)
+    }
+    
+    static func == (lhs: POI, rhs: POI) -> Bool {
+        return lhs.name == rhs.name
     }
 }
