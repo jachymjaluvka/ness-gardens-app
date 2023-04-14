@@ -10,6 +10,14 @@
 		8116EAEC29C9F16800F8877C /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8116EAEB29C9F16800F8877C /* LocationManager.swift */; };
 		81377635299EA7810050E105 /* POI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81377634299EA7810050E105 /* POI.swift */; };
 		817A828029A5240800AE8C55 /* TimerPlayground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817A827F29A5240800AE8C55 /* TimerPlayground.swift */; };
+		8195687929E6CB1C0090E681 /* MapViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8195687829E6CB1C0090E681 /* MapViewRepresentable.swift */; };
+		8195688729E6D90B0090E681 /* RouteFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8195688629E6D90B0090E681 /* RouteFilterView.swift */; };
+		8195688929E7F73F0090E681 /* RecordHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8195688829E7F73F0090E681 /* RecordHeaderView.swift */; };
+		8195688B29E7FACD0090E681 /* RecordButtonBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8195688A29E7FACD0090E681 /* RecordButtonBarView.swift */; };
+		8195688D29E8020A0090E681 /* RoutesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8195688C29E8020A0090E681 /* RoutesViewModel.swift */; };
+		8195688F29E8276D0090E681 /* POIViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8195688E29E8276D0090E681 /* POIViewModel.swift */; };
+		8195689129E82D5D0090E681 /* EditPOIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8195689029E82D5D0090E681 /* EditPOIView.swift */; };
+		8195689629E94D950090E681 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8195689529E94D950090E681 /* DataController.swift */; };
 		8196030B299AB4FC008EDC6D /* NessGardensApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8196030A299AB4FC008EDC6D /* NessGardensApp.swift */; };
 		8196030D299AB4FC008EDC6D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8196030C299AB4FC008EDC6D /* ContentView.swift */; };
 		8196030F299AB50A008EDC6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8196030E299AB50A008EDC6D /* Assets.xcassets */; };
@@ -23,9 +31,9 @@
 		8196033C299ABBBD008EDC6D /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8196033B299ABBBD008EDC6D /* MapView.swift */; };
 		8196033E299AC171008EDC6D /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8196033D299AC171008EDC6D /* RecordView.swift */; };
 		81960340299AC9A3008EDC6D /* RouteDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8196033F299AC9A3008EDC6D /* RouteDetailView.swift */; };
+		8197CEB729E977F4004B4410 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8197CEB629E977F4004B4410 /* Route.swift */; };
 		81AB709A299FBF6B0063164C /* POIDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB7099299FBF6B0063164C /* POIDetailView.swift */; };
-		81AB709C299FE0C30063164C /* AddPOIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB709B299FE0C30063164C /* AddPOIView.swift */; };
-		81FB4423299C0C5A006F5EFE /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FB4422299C0C5A006F5EFE /* Route.swift */; };
+		81AB709C299FE0C30063164C /* AddNewPOIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB709B299FE0C30063164C /* AddNewPOIView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +57,14 @@
 		8116EAEB29C9F16800F8877C /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		81377634299EA7810050E105 /* POI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POI.swift; sourceTree = "<group>"; };
 		817A827F29A5240800AE8C55 /* TimerPlayground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerPlayground.swift; sourceTree = "<group>"; };
+		8195687829E6CB1C0090E681 /* MapViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewRepresentable.swift; sourceTree = "<group>"; };
+		8195688629E6D90B0090E681 /* RouteFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteFilterView.swift; sourceTree = "<group>"; };
+		8195688829E7F73F0090E681 /* RecordHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordHeaderView.swift; sourceTree = "<group>"; };
+		8195688A29E7FACD0090E681 /* RecordButtonBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordButtonBarView.swift; sourceTree = "<group>"; };
+		8195688C29E8020A0090E681 /* RoutesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesViewModel.swift; sourceTree = "<group>"; };
+		8195688E29E8276D0090E681 /* POIViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POIViewModel.swift; sourceTree = "<group>"; };
+		8195689029E82D5D0090E681 /* EditPOIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPOIView.swift; sourceTree = "<group>"; };
+		8195689529E94D950090E681 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		81960307299AB4FC008EDC6D /* NessGardens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NessGardens.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8196030A299AB4FC008EDC6D /* NessGardensApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NessGardensApp.swift; sourceTree = "<group>"; };
 		8196030C299AB4FC008EDC6D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -65,9 +81,9 @@
 		8196033B299ABBBD008EDC6D /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		8196033D299AC171008EDC6D /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
 		8196033F299AC9A3008EDC6D /* RouteDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDetailView.swift; sourceTree = "<group>"; };
+		8197CEB629E977F4004B4410 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		81AB7099299FBF6B0063164C /* POIDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POIDetailView.swift; sourceTree = "<group>"; };
-		81AB709B299FE0C30063164C /* AddPOIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPOIView.swift; sourceTree = "<group>"; };
-		81FB4422299C0C5A006F5EFE /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
+		81AB709B299FE0C30063164C /* AddNewPOIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewPOIView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,12 +111,164 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		817A827E29A5167500AE8C55 /* RecordViews */ = {
+		8195687129E6CA190090E681 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				8195688329E6D8B30090E681 /* Route */,
+				8195688029E6D8940090E681 /* Poi */,
+				8195687D29E6D8700090E681 /* Record */,
+				8195687A29E6D8260090E681 /* Map */,
+				8195687629E6CA600090E681 /* View */,
+				8195687529E6CA590090E681 /* ViewModel */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		8195687229E6CA270090E681 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				8196030A299AB4FC008EDC6D /* NessGardensApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		8195687329E6CA320090E681 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		8195687429E6CA370090E681 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				8116EAEB29C9F16800F8877C /* LocationManager.swift */,
+				8195689529E94D950090E681 /* DataController.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		8195687529E6CA590090E681 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8195687629E6CA600090E681 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8196030C299AB4FC008EDC6D /* ContentView.swift */,
+				81960337299AB66B008EDC6D /* SettingsView.swift */,
+				817A827F29A5240800AE8C55 /* TimerPlayground.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8195687A29E6D8260090E681 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				8195687C29E6D8470090E681 /* View */,
+				8195687B29E6D83C0090E681 /* ViewModel */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		8195687B29E6D83C0090E681 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8195687C29E6D8470090E681 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8195687829E6CB1C0090E681 /* MapViewRepresentable.swift */,
+				8196033B299ABBBD008EDC6D /* MapView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8195687D29E6D8700090E681 /* Record */ = {
+			isa = PBXGroup;
+			children = (
+				8195687F29E6D8840090E681 /* View */,
+				8195687E29E6D8790090E681 /* ViewModel */,
+			);
+			path = Record;
+			sourceTree = "<group>";
+		};
+		8195687E29E6D8790090E681 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8195687F29E6D8840090E681 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				8196033D299AC171008EDC6D /* RecordView.swift */,
+				8195688829E7F73F0090E681 /* RecordHeaderView.swift */,
+				8195688A29E7FACD0090E681 /* RecordButtonBarView.swift */,
 			);
-			path = RecordViews;
+			path = View;
+			sourceTree = "<group>";
+		};
+		8195688029E6D8940090E681 /* Poi */ = {
+			isa = PBXGroup;
+			children = (
+				8195688229E6D8A20090E681 /* View */,
+				8195688129E6D89B0090E681 /* ViewModel */,
+			);
+			path = Poi;
+			sourceTree = "<group>";
+		};
+		8195688129E6D89B0090E681 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8195688E29E8276D0090E681 /* POIViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8195688229E6D8A20090E681 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				81960339299ABAA2008EDC6D /* POIView.swift */,
+				81AB7099299FBF6B0063164C /* POIDetailView.swift */,
+				81AB709B299FE0C30063164C /* AddNewPOIView.swift */,
+				8195689029E82D5D0090E681 /* EditPOIView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8195688329E6D8B30090E681 /* Route */ = {
+			isa = PBXGroup;
+			children = (
+				8195688529E6D8C00090E681 /* View */,
+				8195688429E6D8B90090E681 /* ViewModel */,
+			);
+			path = Route;
+			sourceTree = "<group>";
+		};
+		8195688429E6D8B90090E681 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8195688C29E8020A0090E681 /* RoutesViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8195688529E6D8C00090E681 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				81960335299AB659008EDC6D /* RoutesView.swift */,
+				8196033F299AC9A3008EDC6D /* RouteDetailView.swift */,
+				8195688629E6D90B0090E681 /* RouteFilterView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		819602FE299AB4FC008EDC6D = {
@@ -126,10 +294,11 @@
 		81960309299AB4FC008EDC6D /* NessGardens */ = {
 			isa = PBXGroup;
 			children = (
+				8195687229E6CA270090E681 /* App */,
+				8195687129E6CA190090E681 /* Core */,
+				8195687329E6CA320090E681 /* Extensions */,
+				8195687429E6CA370090E681 /* Managers */,
 				81FB4421299C0C35006F5EFE /* Models */,
-				81960334299AB63A008EDC6D /* Views */,
-				8196030A299AB4FC008EDC6D /* NessGardensApp.swift */,
-				8196030C299AB4FC008EDC6D /* ContentView.swift */,
 				8196030E299AB50A008EDC6D /* Assets.xcassets */,
 				81960310299AB50A008EDC6D /* Preview Content */,
 			);
@@ -161,44 +330,11 @@
 			path = NessGardensUITests;
 			sourceTree = "<group>";
 		};
-		81960334299AB63A008EDC6D /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				817A827E29A5167500AE8C55 /* RecordViews */,
-				81AB7098299FBF4C0063164C /* POIViews */,
-				81AB7097299FBF060063164C /* RouteViews */,
-				81960337299AB66B008EDC6D /* SettingsView.swift */,
-				8196033B299ABBBD008EDC6D /* MapView.swift */,
-				817A827F29A5240800AE8C55 /* TimerPlayground.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		81AB7097299FBF060063164C /* RouteViews */ = {
-			isa = PBXGroup;
-			children = (
-				81960335299AB659008EDC6D /* RoutesView.swift */,
-				8196033F299AC9A3008EDC6D /* RouteDetailView.swift */,
-			);
-			path = RouteViews;
-			sourceTree = "<group>";
-		};
-		81AB7098299FBF4C0063164C /* POIViews */ = {
-			isa = PBXGroup;
-			children = (
-				81960339299ABAA2008EDC6D /* POIView.swift */,
-				81AB7099299FBF6B0063164C /* POIDetailView.swift */,
-				81AB709B299FE0C30063164C /* AddPOIView.swift */,
-			);
-			path = POIViews;
-			sourceTree = "<group>";
-		};
 		81FB4421299C0C35006F5EFE /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				81FB4422299C0C5A006F5EFE /* Route.swift */,
 				81377634299EA7810050E105 /* POI.swift */,
-				8116EAEB29C9F16800F8877C /* LocationManager.swift */,
+				8197CEB629E977F4004B4410 /* Route.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -333,18 +469,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81FB4423299C0C5A006F5EFE /* Route.swift in Sources */,
+				8195688729E6D90B0090E681 /* RouteFilterView.swift in Sources */,
 				8196030D299AB4FC008EDC6D /* ContentView.swift in Sources */,
+				8195688B29E7FACD0090E681 /* RecordButtonBarView.swift in Sources */,
 				817A828029A5240800AE8C55 /* TimerPlayground.swift in Sources */,
 				8196033C299ABBBD008EDC6D /* MapView.swift in Sources */,
+				8195688929E7F73F0090E681 /* RecordHeaderView.swift in Sources */,
 				81960338299AB66B008EDC6D /* SettingsView.swift in Sources */,
+				8195688D29E8020A0090E681 /* RoutesViewModel.swift in Sources */,
 				81AB709A299FBF6B0063164C /* POIDetailView.swift in Sources */,
 				8196033E299AC171008EDC6D /* RecordView.swift in Sources */,
 				81960336299AB659008EDC6D /* RoutesView.swift in Sources */,
-				81AB709C299FE0C30063164C /* AddPOIView.swift in Sources */,
+				8195689129E82D5D0090E681 /* EditPOIView.swift in Sources */,
+				81AB709C299FE0C30063164C /* AddNewPOIView.swift in Sources */,
+				8197CEB729E977F4004B4410 /* Route.swift in Sources */,
 				81377635299EA7810050E105 /* POI.swift in Sources */,
+				8195687929E6CB1C0090E681 /* MapViewRepresentable.swift in Sources */,
 				8116EAEC29C9F16800F8877C /* LocationManager.swift in Sources */,
 				81960340299AC9A3008EDC6D /* RouteDetailView.swift in Sources */,
+				8195688F29E8276D0090E681 /* POIViewModel.swift in Sources */,
+				8195689629E94D950090E681 /* DataController.swift in Sources */,
 				8196033A299ABAA2008EDC6D /* POIView.swift in Sources */,
 				8196030B299AB4FC008EDC6D /* NessGardensApp.swift in Sources */,
 			);
