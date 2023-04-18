@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct RecordHeaderView: View {
+    @EnvironmentObject var recordVM: RecordViewModel
+    
     var body: some View {
         HStack(spacing: 20) {
             VStack(alignment: .leading, spacing: 10){
@@ -15,9 +17,9 @@ struct RecordHeaderView: View {
                 Text("Distance:")
             }
             .font(.title)
-            VStack(alignment: .trailing, spacing: 10){
-                Text("01:45:00")
-                Text("12.56 km")
+            VStack(alignment: .leading, spacing: 10){
+                Text(recordVM.timeStringRepresentaion)
+                Text(String(recordVM.routeCoordinates.last?.latitude ?? 0))
             }
             .font(.title)
             .bold()
@@ -28,5 +30,6 @@ struct RecordHeaderView: View {
 struct RecordHeaderView_Previews: PreviewProvider {
     static var previews: some View {
         RecordHeaderView()
+            .environmentObject(RecordViewModel(lm: LocationManager()))
     }
 }

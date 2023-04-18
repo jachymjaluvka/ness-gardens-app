@@ -54,7 +54,7 @@ struct PointDetailView: View {
             Spacer()
         }
         .padding(/*@START_MENU_TOKEN@*/[.top, .leading, .trailing]/*@END_MENU_TOKEN@*/)
-        .fullScreenCover(isPresented: $showingEdit) {
+        .sheet(isPresented: $showingEdit) {
             EditPointView(point: point)
         }
     }

@@ -18,7 +18,7 @@ struct EditPointView: View {
     @State private var latitude: String
     
     @EnvironmentObject var routesViewModel: RoutesViewModel
-    @State var selectedRoute = 0
+    @State var selectedRoute: Route?
     
     init(point: Point) {
         self.point = point
@@ -48,8 +48,8 @@ struct EditPointView: View {
                 
                 Section(header: Text("Route")) {
                     Picker(selection: $selectedRoute, label: Text("Routes")) {
-                        ForEach(0 ..< self.routesViewModel.allRoutes.count) { route in
-                            Text(self.routesViewModel.allRoutes[route].wrappedName).tag(route)
+                        ForEach(routesViewModel.allRoutes) { (route: Route) in
+                            Text(route.wrappedName)
                         }
                     }
                 }
@@ -87,12 +87,12 @@ struct EditPointView: View {
     }
     
     func save() -> Void {
-        print(selectedRoute)
+        //print(selectedRoute)
         dismiss()
     }
     
     func reset() -> Void {
-        selectedRoute = 0
+        //selectedRoute = 0
     }
 
 }

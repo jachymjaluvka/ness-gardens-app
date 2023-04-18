@@ -83,7 +83,11 @@ struct AddNewPointView: View {
     }
     
     func save() -> Void {
-        
+        pointsViewModel.addNewPoint(name: name,
+                                    summary: description,
+                                    latitude: Float(latitude) ?? 0,
+                                    longitude: Float(longitute) ?? 0,
+                                    routeId: selectedRoute.id)
         dismiss()
     }
     
@@ -97,8 +101,7 @@ struct AddNewPOIView_Previews: PreviewProvider {
     static var previews: some View {
         let dc = DataController()
         let routesVM = RoutesViewModel(dataController: dc)
-        let pointsVM
-        
+        let pointsVM = PointsViewModel(dataController: dc)
         AddNewPointView(firstRoute: routesVM.allRoutes[0])
             .environmentObject(routesVM)
             .environmentObject(pointsVM)

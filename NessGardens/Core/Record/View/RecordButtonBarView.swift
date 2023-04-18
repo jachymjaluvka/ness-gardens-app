@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct RecordButtonBarView: View {
-    
-    @State var recording = false
     @State var showingAddRoute = false
+    @EnvironmentObject var recordVM: RecordViewModel
     
     var body: some View {
         HStack {
@@ -28,8 +27,8 @@ struct RecordButtonBarView: View {
 
             }.frame(width: 100, height: 50)
             
-            if recording {
-                Button(action: pressRecord) {
+            if recordVM.recording {
+                Button(action: pauseRecording) {
                     VStack {
                         Image(systemName: "pause.fill")
                             .resizable()
@@ -41,7 +40,7 @@ struct RecordButtonBarView: View {
 
                 }.frame(width: 100, height: 50)
             } else {
-                Button(action: pressRecord) {
+                Button(action: startRecording) {
                     VStack {
                         Image(systemName: "play.fill")
                             .resizable()
@@ -77,16 +76,22 @@ struct RecordButtonBarView: View {
     }
     
     func stop() -> Void {
+        recordVM.stopTimer()
         showingAddRoute.toggle()
     }
     
-    func pressRecord() -> Void {
-        recording.toggle()
+    func startRecording() -> Void {
+        recordVM.startTimer()
+    }
+    
+    func pauseRecording() -> Void {
+        recordVM.stopTimer()
     }
 }
 
 struct RecordButtonBarView_Previews: PreviewProvider {
     static var previews: some View {
         RecordButtonBarView()
+            .environmentObject(RecordViewModel(lm: LocationManager()))
     }
 }

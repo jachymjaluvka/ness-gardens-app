@@ -10,6 +10,7 @@ import MapKit
 
 struct RecordView: View {
     @State var recording = false
+    @EnvironmentObject var recordVM: RecordViewModel
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -18,7 +19,7 @@ struct RecordView: View {
             
             Divider().padding(.horizontal)
             
-            MapViewRepresentable()
+            MapViewRepresentable(showPolyline: true)
                 .ignoresSafeArea(edges: .horizontal)
             
             Divider()
@@ -33,5 +34,6 @@ struct RecordView: View {
 struct RecordView_Previews: PreviewProvider {
     static var previews: some View {
         RecordView()
+            .environmentObject(RecordViewModel(lm: LocationManager()))
     }
 }

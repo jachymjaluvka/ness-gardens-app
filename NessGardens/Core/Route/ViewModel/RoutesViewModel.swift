@@ -37,4 +37,5 @@ class RoutesViewModel: ObservableObject {
         dc.save()
         allRoutes = dc.fetchRoutes()
     }
+    
 }

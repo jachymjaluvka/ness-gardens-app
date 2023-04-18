@@ -28,15 +28,13 @@ struct PointsView: View {
                 }
                 .navigationTitle("Points of Interest")
                 .toolbar {
-                    if routesViewModel.allRoutes.count > 0 {
-                        ToolbarItem(placement: .automatic) {
-                            Image(systemName: "plus")
-                                .foregroundColor(.blue)
-                                .bold()
-                                .onTapGesture {
-                                    showingAddPOI.toggle()
-                                }
-                        }
+                    ToolbarItem(placement: .automatic) {
+                        Image(systemName: "plus")
+                            .foregroundColor(.blue)
+                            .bold()
+                            .onTapGesture {
+                                showingAddPOI.toggle()
+                            }
                     }
                 }
             } else {

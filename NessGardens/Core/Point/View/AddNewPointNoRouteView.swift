@@ -6,9 +6,13 @@
 //
 
 import SwiftUI
+import CoreLocationUI
 
 struct AddNewPointNoRouteView: View {
     @Environment(\.dismiss) var dismiss
+    
+    @EnvironmentObject var pointsViewModel: PointsViewModel
+    @StateObject var locationManager = LocationManager()
     
     @State private var name = ""
     @State private var description = ""
@@ -30,7 +34,7 @@ struct AddNewPointNoRouteView: View {
                 Section("Location"){
                     TextField("Latitude", text: $latitude)
                     TextField("Longitude", text: $longitute)
-                    Button("Use current location", action: useCurrentLocation)
+                    Button("Current Location", action: useCurrentLocation)
                 }
                 
                 Section(header: Text("Route")) {
@@ -63,7 +67,8 @@ struct AddNewPointNoRouteView: View {
     }
     
     func useCurrentLocation() -> Void {
-        
+        latitude = String(Float(locationManager.location?.latitude ?? 0))
+        longitute = String(Float(locationManager.location?.longitude ?? 0))
     }
     
     func close() -> Void {
@@ -71,6 +76,11 @@ struct AddNewPointNoRouteView: View {
     }
     
     func save() -> Void {
+        pointsViewModel.addNewPoint(name: name,
+                                    summary: description,
+                                    latitude: Float(latitude) ?? 0,
+                                    longitude: Float(longitute) ?? 0,
+                                    routeId: nil)
         dismiss()
     }
     
@@ -81,6 +91,9 @@ struct AddNewPointNoRouteView: View {
 
 struct AddNewPOINoRouteView_Previews: PreviewProvider {
     static var previews: some View {
+        let dc = DataController()
         AddNewPointNoRouteView()
+            .environmentObject(PointsViewModel(dataController: dc))
+            .environmentObject(LocationManager())
     }
 }

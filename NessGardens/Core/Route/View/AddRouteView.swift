@@ -11,6 +11,7 @@ import MapKit
 struct AddRouteView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var routesViewModel: RoutesViewModel
+    @EnvironmentObject var recordingViewModel: RecordViewModel
     
     @State var name: String = ""
     @State var description: String = ""
@@ -97,6 +98,8 @@ struct AddRouteView: View {
                                     type: selectedType,
                                     difficulty: selectedDifficulty
         )
+        
+        recordingViewModel.endRecording()
         dismiss()
     }
     
@@ -111,5 +114,6 @@ struct AddRouteView_Previews: PreviewProvider {
         let vm = RoutesViewModel(dataController: dc)
         AddRouteView()
             .environmentObject(vm)
+            .environmentObject(RecordViewModel(lm: LocationManager()))
     }
 }
