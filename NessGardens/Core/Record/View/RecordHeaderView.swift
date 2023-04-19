@@ -19,7 +19,7 @@ struct RecordHeaderView: View {
             .font(.title)
             VStack(alignment: .leading, spacing: 10){
                 Text(recordVM.timeStringRepresentaion)
-                Text(String(recordVM.routeCoordinates.last?.latitude ?? 0))
+                Text(String(format: "%.3f km", recordVM.distance/1000))
             }
             .font(.title)
             .bold()

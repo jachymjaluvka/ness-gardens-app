@@ -18,7 +18,9 @@ struct EditPointView: View {
     @State private var latitude: String
     
     @EnvironmentObject var routesViewModel: RoutesViewModel
+    @EnvironmentObject var pointsVM: PointsViewModel
     @State var selectedRoute: Route?
+    @StateObject var locationManager = LocationManager()
     
     init(point: Point) {
         self.point = point
@@ -79,7 +81,8 @@ struct EditPointView: View {
     }
     
     func useCurrentLocation() -> Void {
-        
+        latitude = String(Float(locationManager.location?.latitude ?? 0))
+        longitute = String(Float(locationManager.location?.longitude ?? 0))
     }
     
     func close() -> Void {
@@ -87,7 +90,12 @@ struct EditPointView: View {
     }
     
     func save() -> Void {
-        //print(selectedRoute)
+        pointsVM.updatePoint(point: point,
+                             name: name,
+                             summary: description,
+                             latitude: Float(latitude) ?? 0,
+                             longitude: Float(longitute) ?? 0,
+                             routeId: selectedRoute?.id)
         dismiss()
     }
     
@@ -106,5 +114,6 @@ struct EditPOIView_Previews: PreviewProvider {
         
         EditPointView(point: testPoint)
             .environmentObject(RoutesViewModel(dataController: dc))
+            .environmentObject(PointsViewModel(dataController: dc))
     }
 }

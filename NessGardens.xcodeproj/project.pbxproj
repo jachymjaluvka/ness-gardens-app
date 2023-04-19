@@ -9,8 +9,13 @@
 /* Begin PBXBuildFile section */
 		8116EAEC29C9F16800F8877C /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8116EAEB29C9F16800F8877C /* LocationManager.swift */; };
 		81462D0029EC64790021D3C0 /* RecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81462CFF29EC64790021D3C0 /* RecordViewModel.swift */; };
+		81462D0229EECFDC0021D3C0 /* MapViewRouteRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81462D0129EECFDC0021D3C0 /* MapViewRouteRepresentable.swift */; };
+		81462D0429EED1220021D3C0 /* MapViewMainRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81462D0329EED1220021D3C0 /* MapViewMainRepresentable.swift */; };
+		81462D0629EEFB550021D3C0 /* RouteNavLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81462D0529EEFB550021D3C0 /* RouteNavLinkView.swift */; };
+		81462D0829EF08E90021D3C0 /* CLLocation2DExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81462D0729EF08E90021D3C0 /* CLLocation2DExtension.swift */; };
+		81462D0A29EF091E0021D3C0 /* CoreDataEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81462D0929EF091E0021D3C0 /* CoreDataEnums.swift */; };
 		817A828029A5240800AE8C55 /* TimerPlayground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817A827F29A5240800AE8C55 /* TimerPlayground.swift */; };
-		8195687929E6CB1C0090E681 /* MapViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8195687829E6CB1C0090E681 /* MapViewRepresentable.swift */; };
+		8195687929E6CB1C0090E681 /* MapViewRecordRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8195687829E6CB1C0090E681 /* MapViewRecordRepresentable.swift */; };
 		8195688729E6D90B0090E681 /* RouteFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8195688629E6D90B0090E681 /* RouteFilterView.swift */; };
 		8195688929E7F73F0090E681 /* RecordHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8195688829E7F73F0090E681 /* RecordHeaderView.swift */; };
 		8195688B29E7FACD0090E681 /* RecordButtonBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8195688A29E7FACD0090E681 /* RecordButtonBarView.swift */; };
@@ -62,8 +67,13 @@
 /* Begin PBXFileReference section */
 		8116EAEB29C9F16800F8877C /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		81462CFF29EC64790021D3C0 /* RecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewModel.swift; sourceTree = "<group>"; };
+		81462D0129EECFDC0021D3C0 /* MapViewRouteRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewRouteRepresentable.swift; sourceTree = "<group>"; };
+		81462D0329EED1220021D3C0 /* MapViewMainRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewMainRepresentable.swift; sourceTree = "<group>"; };
+		81462D0529EEFB550021D3C0 /* RouteNavLinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteNavLinkView.swift; sourceTree = "<group>"; };
+		81462D0729EF08E90021D3C0 /* CLLocation2DExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocation2DExtension.swift; sourceTree = "<group>"; };
+		81462D0929EF091E0021D3C0 /* CoreDataEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataEnums.swift; sourceTree = "<group>"; };
 		817A827F29A5240800AE8C55 /* TimerPlayground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerPlayground.swift; sourceTree = "<group>"; };
-		8195687829E6CB1C0090E681 /* MapViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewRepresentable.swift; sourceTree = "<group>"; };
+		8195687829E6CB1C0090E681 /* MapViewRecordRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewRecordRepresentable.swift; sourceTree = "<group>"; };
 		8195688629E6D90B0090E681 /* RouteFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteFilterView.swift; sourceTree = "<group>"; };
 		8195688829E7F73F0090E681 /* RecordHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordHeaderView.swift; sourceTree = "<group>"; };
 		8195688A29E7FACD0090E681 /* RecordButtonBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordButtonBarView.swift; sourceTree = "<group>"; };
@@ -147,6 +157,7 @@
 		8195687329E6CA320090E681 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				81462D0729EF08E90021D3C0 /* CLLocation2DExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -196,8 +207,10 @@
 		8195687C29E6D8470090E681 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8195687829E6CB1C0090E681 /* MapViewRepresentable.swift */,
+				8195687829E6CB1C0090E681 /* MapViewRecordRepresentable.swift */,
 				8196033B299ABBBD008EDC6D /* MapView.swift */,
+				81462D0129EECFDC0021D3C0 /* MapViewRouteRepresentable.swift */,
+				81462D0329EED1220021D3C0 /* MapViewMainRepresentable.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -282,6 +295,7 @@
 				8196033F299AC9A3008EDC6D /* RouteDetailView.swift */,
 				8195688629E6D90B0090E681 /* RouteFilterView.swift */,
 				8197CEC329E98E2D004B4410 /* AddRouteView.swift */,
+				81462D0529EEFB550021D3C0 /* RouteNavLinkView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -353,6 +367,7 @@
 				8197CEC029E986E7004B4410 /* Point+CoreDataProperties.swift */,
 				8197CEBB29E97FFB004B4410 /* Route+CoreDataClass.swift */,
 				8197CEBC29E97FFB004B4410 /* Route+CoreDataProperties.swift */,
+				81462D0929EF091E0021D3C0 /* CoreDataEnums.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -488,6 +503,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8195688729E6D90B0090E681 /* RouteFilterView.swift in Sources */,
+				81462D0429EED1220021D3C0 /* MapViewMainRepresentable.swift in Sources */,
 				8196030D299AB4FC008EDC6D /* ContentView.swift in Sources */,
 				8195688B29E7FACD0090E681 /* RecordButtonBarView.swift in Sources */,
 				817A828029A5240800AE8C55 /* TimerPlayground.swift in Sources */,
@@ -497,15 +513,19 @@
 				81960338299AB66B008EDC6D /* SettingsView.swift in Sources */,
 				8197CEBE29E97FFB004B4410 /* Route+CoreDataProperties.swift in Sources */,
 				8197CEC429E98E2D004B4410 /* AddRouteView.swift in Sources */,
+				81462D0229EECFDC0021D3C0 /* MapViewRouteRepresentable.swift in Sources */,
 				8195688D29E8020A0090E681 /* RoutesViewModel.swift in Sources */,
 				81AB709A299FBF6B0063164C /* PointDetailView.swift in Sources */,
 				8197CEC129E986E7004B4410 /* Point+CoreDataClass.swift in Sources */,
+				81462D0A29EF091E0021D3C0 /* CoreDataEnums.swift in Sources */,
 				8196033E299AC171008EDC6D /* RecordView.swift in Sources */,
 				81960336299AB659008EDC6D /* RoutesView.swift in Sources */,
+				81462D0829EF08E90021D3C0 /* CLLocation2DExtension.swift in Sources */,
+				81462D0629EEFB550021D3C0 /* RouteNavLinkView.swift in Sources */,
 				81462D0029EC64790021D3C0 /* RecordViewModel.swift in Sources */,
 				8195689129E82D5D0090E681 /* EditPointView.swift in Sources */,
 				81AB709C299FE0C30063164C /* AddNewPointView.swift in Sources */,
-				8195687929E6CB1C0090E681 /* MapViewRepresentable.swift in Sources */,
+				8195687929E6CB1C0090E681 /* MapViewRecordRepresentable.swift in Sources */,
 				8116EAEC29C9F16800F8877C /* LocationManager.swift in Sources */,
 				8197CEBD29E97FFB004B4410 /* Route+CoreDataClass.swift in Sources */,
 				81960340299AC9A3008EDC6D /* RouteDetailView.swift in Sources */,

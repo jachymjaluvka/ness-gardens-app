@@ -76,8 +76,10 @@ struct RecordButtonBarView: View {
     }
     
     func stop() -> Void {
-        recordVM.stopTimer()
-        showingAddRoute.toggle()
+        if recordVM.routeCoordinates.count > 0 {
+            recordVM.stopTimer()
+            showingAddRoute.toggle()
+        }
     }
     
     func startRecording() -> Void {

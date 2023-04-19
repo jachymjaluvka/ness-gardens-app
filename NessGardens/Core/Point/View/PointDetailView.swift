@@ -10,6 +10,8 @@ import SwiftUI
 struct PointDetailView: View {
     var point: Point
     @State var showingEdit: Bool = false
+    @EnvironmentObject var pointsVM: PointsViewModel
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -35,27 +37,23 @@ struct PointDetailView: View {
             
             Spacer()
             
-            buttonTab
-        }
-    }
-    
-    var buttonTab: some View {
-        HStack(alignment: .center){
-            Spacer()
-            Button("Edit", role: .none, action: edit)
-                .buttonStyle(.borderedProminent)
-                .controlSize(.large)
-                .fontWeight(.semibold)
-            
-            Button("Delete", role: .destructive, action: delete)
-                .buttonStyle(.borderedProminent)
-                .controlSize(.large)
-                .fontWeight(.semibold)
-            Spacer()
-        }
-        .padding(/*@START_MENU_TOKEN@*/[.top, .leading, .trailing]/*@END_MENU_TOKEN@*/)
-        .sheet(isPresented: $showingEdit) {
-            EditPointView(point: point)
+            HStack(alignment: .center){
+                Spacer()
+                Button("Edit", role: .none, action: edit)
+                    .buttonStyle(.borderedProminent)
+                    .controlSize(.large)
+                    .fontWeight(.semibold)
+                
+                Button("Delete", role: .destructive, action: delete)
+                    .buttonStyle(.borderedProminent)
+                    .controlSize(.large)
+                    .fontWeight(.semibold)
+                Spacer()
+            }
+            .padding(/*@START_MENU_TOKEN@*/[.top, .leading, .trailing]/*@END_MENU_TOKEN@*/)
+            .sheet(isPresented: $showingEdit) {
+                EditPointView(point: point)
+            }
         }
     }
     
@@ -65,7 +63,8 @@ struct PointDetailView: View {
     }
     
     func delete() -> Void{
-        print("Deleteing POI!")
+        pointsVM.deletePoint(point: point)
+        dismiss()
     }
 }
 
@@ -79,5 +78,6 @@ struct POIDetailView_Previews: PreviewProvider {
         
         PointDetailView(point: testPoint)
             .environmentObject(RoutesViewModel(dataController: dc))
+            .environmentObject(PointsViewModel(dataController: dc))
     }
 }

@@ -11,7 +11,7 @@ import MapKit
 
 class RecordViewModel: ObservableObject {
     @Published var elapsedSeconds: Int = 0
-    @Published var distance: Float = 0
+    @Published var distance: Double = 0
     @Published var routeCoordinates: [CLLocationCoordinate2D] = []
     @Published var routePoints: [Point] = []
     @Published var recording: Bool = false
@@ -19,6 +19,7 @@ class RecordViewModel: ObservableObject {
     
     private var timer: AnyCancellable?
     private var locationManager: LocationManager
+    private var coordinateID: Int = 0
     
     init(lm: LocationManager) {
         timeStringRepresentaion = "00:00:00"
@@ -26,6 +27,12 @@ class RecordViewModel: ObservableObject {
     }
     
     public func startTimer() -> Void {
+        
+        if elapsedSeconds == 0 {
+            guard let coordinate = self.locationManager.location else { return }
+            routeCoordinates.append(coordinate)
+        }
+        
         recording = true
         timer = Timer
             .publish(every: 1, on: .main, in: .common)
@@ -34,10 +41,12 @@ class RecordViewModel: ObservableObject {
                 self.elapsedSeconds += 1
                 self.formatSeconds()
                 
-                if self.elapsedSeconds % 10 == 0 || self.elapsedSeconds == 0 {
+                if self.elapsedSeconds % 5 == 0 {
                     guard let coordinate = self.locationManager.location else { return }
                     self.routeCoordinates.append(coordinate)
-                    print(coordinate)
+                    
+                    self.distance += coordinate.distance(from: self.routeCoordinates[self.coordinateID])
+                    self.coordinateID += 1
                 }
             }
     }
@@ -48,10 +57,12 @@ class RecordViewModel: ObservableObject {
     }
     
     public func endRecording() -> Void {
-        
         elapsedSeconds = 0
+        formatSeconds()
         routeCoordinates = []
         routePoints = []
+        coordinateID = 0
+        distance = 0
     }
     
     public func formatSeconds() -> Void {

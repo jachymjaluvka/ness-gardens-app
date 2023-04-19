@@ -13,7 +13,7 @@ struct MapView: View {
     @State var tracking: MapUserTrackingMode = .follow
     
     var body: some View {
-        MapViewRepresentable(showPolyline: false)
+        MapViewMainRepresentable()
             .ignoresSafeArea(edges: .top)
     }
 }

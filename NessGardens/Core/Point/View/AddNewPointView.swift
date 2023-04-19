@@ -17,6 +17,7 @@ struct AddNewPointView: View {
     
     @EnvironmentObject var routesViewModel: RoutesViewModel
     @EnvironmentObject var pointsViewModel: PointsViewModel
+    @StateObject var locationManager = LocationManager()
     @State private var selectedRoute: Route
     
     init(firstRoute: Route) {
@@ -75,7 +76,8 @@ struct AddNewPointView: View {
     }
     
     func useCurrentLocation() -> Void {
-        
+        latitude = String(Float(locationManager.location?.latitude ?? 0))
+        longitute = String(Float(locationManager.location?.longitude ?? 0))
     }
     
     func close() -> Void {

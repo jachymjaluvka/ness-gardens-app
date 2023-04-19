@@ -8,48 +8,17 @@
 import SwiftUI
 import MapKit
 
-enum MapType {
-    case informative
-    case recording
-    case route
-}
-
-struct MapViewRepresentable: UIViewRepresentable {
+struct MapViewRecordRepresentable: UIViewRepresentable {
     
     let mapView = MKMapView()
     let locationManager = LocationManager()
-    private var type: MapType
-    var showPolyline: Bool
     
     @EnvironmentObject var recordViewModel: RecordViewModel
-    
-    init(showPolyline: Bool, type: MapType) {
-        self.type = type
-        
-        switch type {
-        case .informative:
-            self.showPolyline = false
-        case .recording, .route:
-            self.showPolyline = true
-        }
-    }
     
     func makeUIView(context: Context) -> some UIView {
         mapView.delegate = context.coordinator
         mapView.isRotateEnabled = false
-        
-        switch type {
-        case .informative:
-            mapView.showsUserLocation = true
-            mapView.userTrackingMode = .follow
-        case .route:
-            mapView.showsUserLocation = false
-            mapView.userTrackingMode = .none
-        case .recording:
-            mapView.showsUserLocation = true
-            mapView.userTrackingMode = .follow
-        }
-        
+        mapView.showsUserLocation = true
         
         return mapView
     }
@@ -63,12 +32,12 @@ struct MapViewRepresentable: UIViewRepresentable {
     }
 }
 
-extension MapViewRepresentable {
+extension MapViewRecordRepresentable {
     
     class MapCoordinator: NSObject, MKMapViewDelegate {
-        let parent: MapViewRepresentable
+        let parent: MapViewRecordRepresentable
         
-        init(parent: MapViewRepresentable) {
+        init(parent: MapViewRecordRepresentable) {
             self.parent = parent
             super.init()
         }
@@ -92,7 +61,7 @@ extension MapViewRepresentable {
         
         func addPolyline(coordinates: [CLLocationCoordinate2D]) {
             parent.mapView.removeOverlays(parent.mapView.overlays)
-            var polyline = MKPolyline(coordinates: coordinates, count: coordinates.count)
+            let polyline = MKPolyline(coordinates: coordinates, count: coordinates.count)
             parent.mapView.addOverlay(polyline)
         }
         

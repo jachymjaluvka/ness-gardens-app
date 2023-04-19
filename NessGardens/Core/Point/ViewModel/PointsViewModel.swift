@@ -37,17 +37,27 @@ class PointsViewModel: ObservableObject {
         allPoints = dc.fetchPoints()
     }
     
-    public func updatePoint(name: String,
+    public func updatePoint(point: Point,
+                            name: String,
                             summary: String,
                             latitude: Float,
                             longitude: Float,
                             routeId: UUID?
     ) -> Void {
-        
+        point.id = UUID()
+        point.name = name
+        point.summary = summary
+        point.latitude = latitude
+        point.longitude = longitude
+        point.routeId = routeId
+        dc.save()
+        allPoints = dc.fetchPoints()
     }
     
     public func deletePoint(point: Point) -> Void {
-        
+        dc.container.viewContext.delete(point)
+        dc.save()
+        allPoints = dc.fetchPoints()
     }
     
 }

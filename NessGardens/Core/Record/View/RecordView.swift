@@ -19,7 +19,7 @@ struct RecordView: View {
             
             Divider().padding(.horizontal)
             
-            MapViewRepresentable(showPolyline: true)
+            MapViewRecordRepresentable()
                 .ignoresSafeArea(edges: .horizontal)
             
             Divider()

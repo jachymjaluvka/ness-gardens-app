@@ -19,11 +19,7 @@ struct RoutesView: View {
                 NavigationLink {
                     RouteDetailView(route: route)
                 } label: {
-                    HStack {
-                        Text(route.wrappedName).bold()
-                        var routeDistance = String(format: "- %.2f km", route.distance)
-                        Text(routeDistance)
-                    }
+                    RouteNavLinkView(route: route)
                 }
             }
             .navigationTitle("Routes")

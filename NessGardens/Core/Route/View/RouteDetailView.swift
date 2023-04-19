@@ -9,6 +9,9 @@ import SwiftUI
 
 
 struct RouteDetailView: View {
+    @EnvironmentObject var routesVM: RoutesViewModel
+    @Environment(\.dismiss) var dismiss
+    
     var route: Route
     
     var body: some View {
@@ -45,7 +48,7 @@ struct RouteDetailView: View {
                         Divider()
                         Text(route.wrappedDifficulty)
                         Divider()
-                        Text("\(String(format: "%.2f km", route.distance))")
+                        Text(String(format: "%.3f km", route.distance/1000))
                         Divider()
                     }
                 }.padding(.horizontal)
@@ -54,7 +57,7 @@ struct RouteDetailView: View {
                 Text("Map")
                     .padding([.top, .leading, .trailing])
                     .font(.title3)
-                MapViewRepresentable()
+                MapViewRouteRepresentable(route: route.wrappedCoordinates)
                     .frame(height: 400)
                 
                 HStack(spacing: 20) {
@@ -83,7 +86,8 @@ struct RouteDetailView: View {
     }
     
     func delete() {
-        
+        routesVM.deleteRoute(route: route)
+        dismiss()
     }
     
 }
@@ -97,6 +101,7 @@ struct RouteDetailView_Previews: PreviewProvider {
         let testRoute = Route(context: context)
         
         RouteDetailView(route: testRoute)
+            .environmentObject(RoutesViewModel(dataController: dc))
     }
 }
 

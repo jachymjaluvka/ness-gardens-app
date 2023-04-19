@@ -10,17 +10,17 @@ import MapKit
 
 struct AddRouteView: View {
     @Environment(\.dismiss) var dismiss
-    @EnvironmentObject var routesViewModel: RoutesViewModel
-    @EnvironmentObject var recordingViewModel: RecordViewModel
+    @EnvironmentObject var routesVM: RoutesViewModel
+    @EnvironmentObject var recordVM: RecordViewModel
     
     @State var name: String = ""
     @State var description: String = ""
     @State var selectedDifficulty = "Easy"
     @State var selectedType = "Excercise"
+    @State var accessible = false
     
     let difficulties = ["Easy", "Medium", "Hard"]
     let types = ["Excercise", "Informative", "Exploration", "Leisure"]
-    let distance = "12.5km"
     
     var body: some View {
         NavigationView {
@@ -34,9 +34,9 @@ struct AddRouteView: View {
                 }
                 
                 Section ("Map") {
-                    MapViewRepresentable()
+                    MapViewRouteRepresentable(route: recordVM.routeCoordinates)
                         .frame(height: 250)
-                    Text("Distance: \(distance)").bold()
+                    Text(String(format: "Distance: %.3f km", recordVM.distance/1000)).bold()
                 }
 
                 Section("Extra") {
@@ -45,18 +45,19 @@ struct AddRouteView: View {
                             Text($0)
                         }
                     }
-                    
+
                     Picker("Type", selection: $selectedType){
                         ForEach(types, id: \.self)  {
                             Text($0)
                         }
                     }
+                    
+                    Toggle(isOn: $accessible) {
+                        Text("Accessible")
+                    }
                 }
                 
                 Section("Points") {
-                    List {
-                        
-                    }
                     Divider()
                     HStack {
                         Spacer()
@@ -88,23 +89,28 @@ struct AddRouteView: View {
     }
     
     func save() -> Void {
-        routesViewModel.addNewRoute(name: name,
-                                    summary: description,
-                                    coordinates: [CLLocationCoordinate2D(latitude: 50.073658,
-                                                                         longitude: 14.418540),
-                                                  CLLocationCoordinate2D(latitude: 51.073658,
-                                                                         longitude: 15.418540)
-                                    ],
-                                    type: selectedType,
-                                    difficulty: selectedDifficulty
+        routesVM.addNewRoute(name: name,
+                             summary: description,
+                             distance:recordVM.distance,
+                             coordinates: recordVM.routeCoordinates,
+                             type: selectedType,
+                             difficulty: selectedDifficulty,
+                             accessible: accessible
         )
         
-        recordingViewModel.endRecording()
+        recordVM.endRecording()
         dismiss()
     }
     
     func reset() -> Void {
-        
+        name = ""
+        description = ""
+        selectedDifficulty = "Easy"
+        selectedType = "Excercise"
+    }
+    
+    func formatCoordinate(coord: CLLocationCoordinate2D?) -> Float {
+        return Float(coord?.longitude ?? 0)
     }
 }
 
