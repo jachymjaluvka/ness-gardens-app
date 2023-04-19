@@ -9,13 +9,13 @@
 import SwiftUI
 
 struct RoutesView: View {
-    @EnvironmentObject var routesViewModel: RoutesViewModel
+    @EnvironmentObject var dataVM: DataController
     
     @State private var showingFilter = false
     
     var body: some View {
         NavigationStack {
-            List(routesViewModel.allRoutes) { route in
+            List(dataVM.allRoutes) { route in
                 NavigationLink {
                     RouteDetailView(route: route)
                 } label: {
@@ -42,6 +42,6 @@ struct RoutesView_Previews: PreviewProvider {
     static var previews: some View {
         let dc = DataController()
         RoutesView()
-            .environmentObject(RoutesViewModel(dataController: dc))
+            .environmentObject(dc)
     }
 }

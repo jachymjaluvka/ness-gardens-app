@@ -8,43 +8,36 @@
 import SwiftUI
 
 struct TimerPlayground: View {
-    @State var isTimerRunning = false
-    @State private var startTime =  Date()
-    @State var interval = TimeInterval()
-    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
-    @State var formatter: DateComponentsFormatter = {
-        let formatter = DateComponentsFormatter()
-        formatter.allowedUnits = [.hour, .minute, .second]
-        formatter.unitsStyle = .abbreviated
-        formatter.zeroFormattingBehavior = .pad
-        return formatter
-    }()
+    @EnvironmentObject var dataVM: DataController
+    
+    @State var routes: [Route] = []
     
     var body: some View {
         VStack {
-            Text(formatter.string(from: interval) ?? "")
-                .font(Font.system(.largeTitle, design: .monospaced))
-                .onReceive(timer) { _ in
-                    if self.isTimerRunning {
-                        interval = Date().timeIntervalSince(startTime)
+            Text("Routes")
+            List {
+                ForEach(routes, id: \.self) { route in
+                    Section(route.wrappedName) {
+                        ForEach(dataVM.fetchRoutePoints(route: route), id: \.self) { point in
+                            Text(point.wrappedName)
+                        }
                     }
                 }
-                .onAppear() {
-                    if !isTimerRunning {
-                        startTime = Date()
-                        isTimerRunning.toggle()
-                    }
-                }
-            Button("Stop") {
-                isTimerRunning.toggle()
             }
-        }
+        }.padding(.horizontal)
+            .onAppear(perform: loadRoutes)
+    }
+    
+    func loadRoutes() -> Void {
+        routes = dataVM.fetchRoutes()
     }
 }
 
 struct TimerPlayground_Previews: PreviewProvider {
     static var previews: some View {
+        let dc = DataController()
         TimerPlayground()
+            .environmentObject(dc)
     }
 }

@@ -2,7 +2,7 @@
 //  Point+CoreDataClass.swift
 //  NessGardens
 //
-//  Created by Jachym Jaluvka on 14.04.2023.
+//  Created by Jachym Jaluvka on 19.04.2023.
 //
 //
 

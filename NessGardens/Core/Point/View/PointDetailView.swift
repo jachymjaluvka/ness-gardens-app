@@ -10,7 +10,7 @@ import SwiftUI
 struct PointDetailView: View {
     var point: Point
     @State var showingEdit: Bool = false
-    @EnvironmentObject var pointsVM: PointsViewModel
+    @EnvironmentObject var dataVM: DataController
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
@@ -63,7 +63,7 @@ struct PointDetailView: View {
     }
     
     func delete() -> Void{
-        pointsVM.deletePoint(point: point)
+        dataVM.deletePoint(point: point)
         dismiss()
     }
 }
@@ -77,7 +77,6 @@ struct POIDetailView_Previews: PreviewProvider {
         let testPoint = Point(context: context)
         
         PointDetailView(point: testPoint)
-            .environmentObject(RoutesViewModel(dataController: dc))
-            .environmentObject(PointsViewModel(dataController: dc))
+            .environmentObject(dc)
     }
 }

@@ -11,7 +11,7 @@ import CoreLocationUI
 struct AddNewPointNoRouteView: View {
     @Environment(\.dismiss) var dismiss
     
-    @EnvironmentObject var pointsViewModel: PointsViewModel
+    @EnvironmentObject var dataVM: DataController
     @StateObject var locationManager = LocationManager()
     
     @State private var name = ""
@@ -76,11 +76,11 @@ struct AddNewPointNoRouteView: View {
     }
     
     func save() -> Void {
-        pointsViewModel.addNewPoint(name: name,
+        dataVM.addNewPoint(name: name,
                                     summary: description,
                                     latitude: Float(latitude) ?? 0,
                                     longitude: Float(longitute) ?? 0,
-                                    routeId: nil)
+                                    route: nil)
         dismiss()
     }
     
@@ -93,7 +93,7 @@ struct AddNewPOINoRouteView_Previews: PreviewProvider {
     static var previews: some View {
         let dc = DataController()
         AddNewPointNoRouteView()
-            .environmentObject(PointsViewModel(dataController: dc))
+            .environmentObject(dc)
             .environmentObject(LocationManager())
     }
 }

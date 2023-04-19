@@ -82,4 +82,17 @@ class RoutesViewModel: ObservableObject {
         selectedRoute = nil
     }
     
+    public func updateRoutesArray() -> Void {
+        self.allRoutes = self.dc.fetchRoutes()
+        print(allRoutes)
+    }
+    
+    public func getAllRoutes() -> [Route] {
+        return dc.fetchRoutes()
+    }
+    
+    public func fetchRoutePoints(route: Route) -> [Point] {
+        return dc.fetchRoutePoints(route: route)
+    }
+    
 }

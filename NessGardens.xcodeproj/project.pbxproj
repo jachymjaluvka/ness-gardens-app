@@ -14,13 +14,15 @@
 		81462D0629EEFB550021D3C0 /* RouteNavLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81462D0529EEFB550021D3C0 /* RouteNavLinkView.swift */; };
 		81462D0829EF08E90021D3C0 /* CLLocation2DExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81462D0729EF08E90021D3C0 /* CLLocation2DExtension.swift */; };
 		81462D0A29EF091E0021D3C0 /* CoreDataEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81462D0929EF091E0021D3C0 /* CoreDataEnums.swift */; };
+		815FE28929EFFB10000865DE /* Point+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815FE28529EFFB10000865DE /* Point+CoreDataClass.swift */; };
+		815FE28A29EFFB10000865DE /* Point+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815FE28629EFFB10000865DE /* Point+CoreDataProperties.swift */; };
+		815FE28B29EFFB10000865DE /* Route+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815FE28729EFFB10000865DE /* Route+CoreDataClass.swift */; };
+		815FE28C29EFFB10000865DE /* Route+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815FE28829EFFB10000865DE /* Route+CoreDataProperties.swift */; };
 		817A828029A5240800AE8C55 /* TimerPlayground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817A827F29A5240800AE8C55 /* TimerPlayground.swift */; };
 		8195687929E6CB1C0090E681 /* MapViewRecordRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8195687829E6CB1C0090E681 /* MapViewRecordRepresentable.swift */; };
 		8195688729E6D90B0090E681 /* RouteFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8195688629E6D90B0090E681 /* RouteFilterView.swift */; };
 		8195688929E7F73F0090E681 /* RecordHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8195688829E7F73F0090E681 /* RecordHeaderView.swift */; };
 		8195688B29E7FACD0090E681 /* RecordButtonBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8195688A29E7FACD0090E681 /* RecordButtonBarView.swift */; };
-		8195688D29E8020A0090E681 /* RoutesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8195688C29E8020A0090E681 /* RoutesViewModel.swift */; };
-		8195688F29E8276D0090E681 /* PointsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8195688E29E8276D0090E681 /* PointsViewModel.swift */; };
 		8195689129E82D5D0090E681 /* EditPointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8195689029E82D5D0090E681 /* EditPointView.swift */; };
 		8195689629E94D950090E681 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8195689529E94D950090E681 /* DataController.swift */; };
 		8196030B299AB4FC008EDC6D /* NessGardensApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8196030A299AB4FC008EDC6D /* NessGardensApp.swift */; };
@@ -37,10 +39,6 @@
 		8196033E299AC171008EDC6D /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8196033D299AC171008EDC6D /* RecordView.swift */; };
 		81960340299AC9A3008EDC6D /* RouteDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8196033F299AC9A3008EDC6D /* RouteDetailView.swift */; };
 		8197CEBA29E97CF1004B4410 /* NessGardens.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8197CEB829E97CF1004B4410 /* NessGardens.xcdatamodeld */; };
-		8197CEBD29E97FFB004B4410 /* Route+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8197CEBB29E97FFB004B4410 /* Route+CoreDataClass.swift */; };
-		8197CEBE29E97FFB004B4410 /* Route+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8197CEBC29E97FFB004B4410 /* Route+CoreDataProperties.swift */; };
-		8197CEC129E986E7004B4410 /* Point+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8197CEBF29E986E7004B4410 /* Point+CoreDataClass.swift */; };
-		8197CEC229E986E7004B4410 /* Point+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8197CEC029E986E7004B4410 /* Point+CoreDataProperties.swift */; };
 		8197CEC429E98E2D004B4410 /* AddRouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8197CEC329E98E2D004B4410 /* AddRouteView.swift */; };
 		8197CEC629E9A6F3004B4410 /* AddNewPointNoRouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8197CEC529E9A6F3004B4410 /* AddNewPointNoRouteView.swift */; };
 		81AB709A299FBF6B0063164C /* PointDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB7099299FBF6B0063164C /* PointDetailView.swift */; };
@@ -72,13 +70,15 @@
 		81462D0529EEFB550021D3C0 /* RouteNavLinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteNavLinkView.swift; sourceTree = "<group>"; };
 		81462D0729EF08E90021D3C0 /* CLLocation2DExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocation2DExtension.swift; sourceTree = "<group>"; };
 		81462D0929EF091E0021D3C0 /* CoreDataEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataEnums.swift; sourceTree = "<group>"; };
+		815FE28529EFFB10000865DE /* Point+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Point+CoreDataClass.swift"; sourceTree = "<group>"; };
+		815FE28629EFFB10000865DE /* Point+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Point+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		815FE28729EFFB10000865DE /* Route+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Route+CoreDataClass.swift"; sourceTree = "<group>"; };
+		815FE28829EFFB10000865DE /* Route+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Route+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		817A827F29A5240800AE8C55 /* TimerPlayground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerPlayground.swift; sourceTree = "<group>"; };
 		8195687829E6CB1C0090E681 /* MapViewRecordRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewRecordRepresentable.swift; sourceTree = "<group>"; };
 		8195688629E6D90B0090E681 /* RouteFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteFilterView.swift; sourceTree = "<group>"; };
 		8195688829E7F73F0090E681 /* RecordHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordHeaderView.swift; sourceTree = "<group>"; };
 		8195688A29E7FACD0090E681 /* RecordButtonBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordButtonBarView.swift; sourceTree = "<group>"; };
-		8195688C29E8020A0090E681 /* RoutesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesViewModel.swift; sourceTree = "<group>"; };
-		8195688E29E8276D0090E681 /* PointsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsViewModel.swift; sourceTree = "<group>"; };
 		8195689029E82D5D0090E681 /* EditPointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPointView.swift; sourceTree = "<group>"; };
 		8195689529E94D950090E681 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		81960307299AB4FC008EDC6D /* NessGardens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NessGardens.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,10 +98,6 @@
 		8196033D299AC171008EDC6D /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
 		8196033F299AC9A3008EDC6D /* RouteDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDetailView.swift; sourceTree = "<group>"; };
 		8197CEB929E97CF1004B4410 /* NessGardens.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NessGardens.xcdatamodel; sourceTree = "<group>"; };
-		8197CEBB29E97FFB004B4410 /* Route+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Route+CoreDataClass.swift"; sourceTree = "<group>"; };
-		8197CEBC29E97FFB004B4410 /* Route+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Route+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		8197CEBF29E986E7004B4410 /* Point+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Point+CoreDataClass.swift"; sourceTree = "<group>"; };
-		8197CEC029E986E7004B4410 /* Point+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Point+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8197CEC329E98E2D004B4410 /* AddRouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRouteView.swift; sourceTree = "<group>"; };
 		8197CEC529E9A6F3004B4410 /* AddNewPointNoRouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewPointNoRouteView.swift; sourceTree = "<group>"; };
 		81AB7099299FBF6B0063164C /* PointDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointDetailView.swift; sourceTree = "<group>"; };
@@ -246,17 +242,8 @@
 			isa = PBXGroup;
 			children = (
 				8195688229E6D8A20090E681 /* View */,
-				8195688129E6D89B0090E681 /* ViewModel */,
 			);
 			path = Point;
-			sourceTree = "<group>";
-		};
-		8195688129E6D89B0090E681 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				8195688E29E8276D0090E681 /* PointsViewModel.swift */,
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		8195688229E6D8A20090E681 /* View */ = {
@@ -283,7 +270,6 @@
 		8195688429E6D8B90090E681 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				8195688C29E8020A0090E681 /* RoutesViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -363,10 +349,10 @@
 		81FB4421299C0C35006F5EFE /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				8197CEBF29E986E7004B4410 /* Point+CoreDataClass.swift */,
-				8197CEC029E986E7004B4410 /* Point+CoreDataProperties.swift */,
-				8197CEBB29E97FFB004B4410 /* Route+CoreDataClass.swift */,
-				8197CEBC29E97FFB004B4410 /* Route+CoreDataProperties.swift */,
+				815FE28529EFFB10000865DE /* Point+CoreDataClass.swift */,
+				815FE28629EFFB10000865DE /* Point+CoreDataProperties.swift */,
+				815FE28729EFFB10000865DE /* Route+CoreDataClass.swift */,
+				815FE28829EFFB10000865DE /* Route+CoreDataProperties.swift */,
 				81462D0929EF091E0021D3C0 /* CoreDataEnums.swift */,
 			);
 			path = CoreData;
@@ -511,13 +497,11 @@
 				8195688929E7F73F0090E681 /* RecordHeaderView.swift in Sources */,
 				8197CEC629E9A6F3004B4410 /* AddNewPointNoRouteView.swift in Sources */,
 				81960338299AB66B008EDC6D /* SettingsView.swift in Sources */,
-				8197CEBE29E97FFB004B4410 /* Route+CoreDataProperties.swift in Sources */,
 				8197CEC429E98E2D004B4410 /* AddRouteView.swift in Sources */,
 				81462D0229EECFDC0021D3C0 /* MapViewRouteRepresentable.swift in Sources */,
-				8195688D29E8020A0090E681 /* RoutesViewModel.swift in Sources */,
 				81AB709A299FBF6B0063164C /* PointDetailView.swift in Sources */,
-				8197CEC129E986E7004B4410 /* Point+CoreDataClass.swift in Sources */,
 				81462D0A29EF091E0021D3C0 /* CoreDataEnums.swift in Sources */,
+				815FE28B29EFFB10000865DE /* Route+CoreDataClass.swift in Sources */,
 				8196033E299AC171008EDC6D /* RecordView.swift in Sources */,
 				81960336299AB659008EDC6D /* RoutesView.swift in Sources */,
 				81462D0829EF08E90021D3C0 /* CLLocation2DExtension.swift in Sources */,
@@ -526,14 +510,14 @@
 				8195689129E82D5D0090E681 /* EditPointView.swift in Sources */,
 				81AB709C299FE0C30063164C /* AddNewPointView.swift in Sources */,
 				8195687929E6CB1C0090E681 /* MapViewRecordRepresentable.swift in Sources */,
+				815FE28929EFFB10000865DE /* Point+CoreDataClass.swift in Sources */,
+				815FE28C29EFFB10000865DE /* Route+CoreDataProperties.swift in Sources */,
 				8116EAEC29C9F16800F8877C /* LocationManager.swift in Sources */,
-				8197CEBD29E97FFB004B4410 /* Route+CoreDataClass.swift in Sources */,
 				81960340299AC9A3008EDC6D /* RouteDetailView.swift in Sources */,
 				8197CEBA29E97CF1004B4410 /* NessGardens.xcdatamodeld in Sources */,
-				8197CEC229E986E7004B4410 /* Point+CoreDataProperties.swift in Sources */,
-				8195688F29E8276D0090E681 /* PointsViewModel.swift in Sources */,
 				8195689629E94D950090E681 /* DataController.swift in Sources */,
 				8196033A299ABAA2008EDC6D /* PointsView.swift in Sources */,
+				815FE28A29EFFB10000865DE /* Point+CoreDataProperties.swift in Sources */,
 				8196030B299AB4FC008EDC6D /* NessGardensApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

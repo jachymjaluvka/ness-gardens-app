@@ -20,7 +20,7 @@ struct MapViewRouteRepresentable: UIViewRepresentable {
         mapView.showsUserLocation = false
         
         let region = MKCoordinateRegion(
-            center: route.first!,
+            center: route.first ?? CLLocationCoordinate2D(latitude: 53.400002, longitude: -2.983333),
             span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
         )
         

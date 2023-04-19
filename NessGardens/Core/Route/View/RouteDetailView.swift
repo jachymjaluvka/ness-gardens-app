@@ -9,7 +9,7 @@ import SwiftUI
 
 
 struct RouteDetailView: View {
-    @EnvironmentObject var routesVM: RoutesViewModel
+    @EnvironmentObject var dataVM: DataController
     @Environment(\.dismiss) var dismiss
     
     var route: Route
@@ -53,13 +53,29 @@ struct RouteDetailView: View {
                     }
                 }.padding(.horizontal)
                     .bold()
-
+                
+                Text("Points")
+                    .padding([.top, .leading, .trailing])
+                    .font(.headline)
+                
+                NavigationStack {
+                    List(route.pointsArray) { point in
+                        NavigationLink {
+                            PointDetailView(point: point)
+                        } label: {
+                            HStack {
+                                Text(point.wrappedName).bold()
+                            }
+                        }
+                    }
+                }
+                
                 Text("Map")
                     .padding([.top, .leading, .trailing])
                     .font(.title3)
                 MapViewRouteRepresentable(route: route.wrappedCoordinates)
                     .frame(height: 400)
-                
+            
                 HStack(spacing: 20) {
                     Spacer()
                     Button("Select", action: select)
@@ -86,7 +102,7 @@ struct RouteDetailView: View {
     }
     
     func delete() {
-        routesVM.deleteRoute(route: route)
+        dataVM.deleteRoute(route: route)
         dismiss()
     }
     
@@ -101,7 +117,7 @@ struct RouteDetailView_Previews: PreviewProvider {
         let testRoute = Route(context: context)
         
         RouteDetailView(route: testRoute)
-            .environmentObject(RoutesViewModel(dataController: dc))
+            .environmentObject(dc)
     }
 }
 

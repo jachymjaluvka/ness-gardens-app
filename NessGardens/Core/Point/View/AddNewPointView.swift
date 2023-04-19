@@ -15,14 +15,9 @@ struct AddNewPointView: View {
     @State private var longitute = ""
     @State private var latitude = ""
     
-    @EnvironmentObject var routesViewModel: RoutesViewModel
-    @EnvironmentObject var pointsViewModel: PointsViewModel
+    @EnvironmentObject var dataVM: DataController
     @StateObject var locationManager = LocationManager()
-    @State private var selectedRoute: Route
-    
-    init(firstRoute: Route) {
-        _selectedRoute = State(initialValue: firstRoute)
-    }
+    @State private var selectedRoute: Route? = nil
     
     var body: some View {
         
@@ -44,8 +39,9 @@ struct AddNewPointView: View {
                 
                 Section(header: Text("Route")) {
                     Picker(selection: $selectedRoute, label: Text("Routes")) {
-                        ForEach(routesViewModel.allRoutes) { (route: Route) in
-                            Text(route.wrappedName)
+                        Text("No Route").tag(nil as Route?)
+                        ForEach(dataVM.allRoutes) { (route: Route) in
+                            Text(route.wrappedName).tag(route as Route?)
                         }
                     }
                 }
@@ -71,7 +67,6 @@ struct AddNewPointView: View {
                     Button("Close", action: close)
                 }
             }
-            .onAppear()
         }
     }
     
@@ -85,16 +80,18 @@ struct AddNewPointView: View {
     }
     
     func save() -> Void {
-        pointsViewModel.addNewPoint(name: name,
+        dataVM.addNewPoint(name: name,
                                     summary: description,
                                     latitude: Float(latitude) ?? 0,
                                     longitude: Float(longitute) ?? 0,
-                                    routeId: selectedRoute.id)
+                                    route: selectedRoute)
+        
+        print(selectedRoute?.wrappedName ?? "")
         dismiss()
     }
     
     func reset() -> Void {
-        selectedRoute = routesViewModel.allRoutes[0]
+        selectedRoute = nil
     }
 
 }
@@ -102,10 +99,7 @@ struct AddNewPointView: View {
 struct AddNewPOIView_Previews: PreviewProvider {
     static var previews: some View {
         let dc = DataController()
-        let routesVM = RoutesViewModel(dataController: dc)
-        let pointsVM = PointsViewModel(dataController: dc)
-        AddNewPointView(firstRoute: routesVM.allRoutes[0])
-            .environmentObject(routesVM)
-            .environmentObject(pointsVM)
+        AddNewPointView()
+            .environmentObject(dc)
     }
 }

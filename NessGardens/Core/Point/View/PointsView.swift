@@ -9,15 +9,14 @@ import SwiftUI
 
 struct PointsView: View {
     @State private var showingAddPOI = false
-    @EnvironmentObject var pointsViewModel: PointsViewModel
-    @EnvironmentObject var routesViewModel: RoutesViewModel
+    @EnvironmentObject var dataVM: DataController
     @State var showAlert: Bool = false
     
     var body: some View {
         
         NavigationStack {
-            if pointsViewModel.allPoints.count > 0 {
-                List(pointsViewModel.allPoints) { point in
+            if dataVM.allPoints.count > 0 {
+                List(dataVM.allPoints) { point in
                     NavigationLink {
                         PointDetailView(point: point)
                     } label: {
@@ -56,8 +55,8 @@ struct PointsView: View {
             
         }
         .sheet(isPresented: $showingAddPOI) {
-            if routesViewModel.allRoutes.count > 0 {
-                AddNewPointView(firstRoute: routesViewModel.allRoutes[0])
+            if dataVM.allRoutes.count > 0 {
+                AddNewPointView()
             } else {
                 AddNewPointNoRouteView()
             }
@@ -75,7 +74,6 @@ struct POIView_Previews: PreviewProvider {
         let dc = DataController()
         
         PointsView()
-            .environmentObject(RoutesViewModel(dataController: dc))
-            .environmentObject(PointsViewModel(dataController: dc))
+            .environmentObject(dc)
     }
 }

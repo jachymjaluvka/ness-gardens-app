@@ -17,8 +17,7 @@ struct EditPointView: View {
     @State private var longitute: String
     @State private var latitude: String
     
-    @EnvironmentObject var routesViewModel: RoutesViewModel
-    @EnvironmentObject var pointsVM: PointsViewModel
+    @EnvironmentObject var dataVM: DataController
     @State var selectedRoute: Route?
     @StateObject var locationManager = LocationManager()
     
@@ -28,6 +27,7 @@ struct EditPointView: View {
         _description = State(initialValue: point.wrappedSummary)
         _latitude = State(initialValue: String(point.latitude))
         _longitute = State(initialValue: String(point.longitude))
+        _selectedRoute = State(initialValue: point.route)
     }
     
     var body: some View {
@@ -50,8 +50,9 @@ struct EditPointView: View {
                 
                 Section(header: Text("Route")) {
                     Picker(selection: $selectedRoute, label: Text("Routes")) {
-                        ForEach(routesViewModel.allRoutes) { (route: Route) in
-                            Text(route.wrappedName)
+                        Text("No Route").tag(nil as Route?)
+                        ForEach(dataVM.allRoutes) { (route: Route) in
+                            Text(route.wrappedName).tag(route as Route?)
                         }
                     }
                 }
@@ -90,12 +91,13 @@ struct EditPointView: View {
     }
     
     func save() -> Void {
-        pointsVM.updatePoint(point: point,
+        dataVM.updatePoint(point: point,
                              name: name,
                              summary: description,
                              latitude: Float(latitude) ?? 0,
                              longitude: Float(longitute) ?? 0,
-                             routeId: selectedRoute?.id)
+                             route: selectedRoute)
+        
         dismiss()
     }
     
@@ -113,7 +115,6 @@ struct EditPOIView_Previews: PreviewProvider {
         let testPoint = Point(context: context)
         
         EditPointView(point: testPoint)
-            .environmentObject(RoutesViewModel(dataController: dc))
-            .environmentObject(PointsViewModel(dataController: dc))
+            .environmentObject(dc)
     }
 }

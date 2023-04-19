@@ -10,7 +10,7 @@ import MapKit
 
 struct AddRouteView: View {
     @Environment(\.dismiss) var dismiss
-    @EnvironmentObject var routesVM: RoutesViewModel
+    @EnvironmentObject var dataVM: DataController
     @EnvironmentObject var recordVM: RecordViewModel
     
     @State var name: String = ""
@@ -38,16 +38,16 @@ struct AddRouteView: View {
                         .frame(height: 250)
                     Text(String(format: "Distance: %.3f km", recordVM.distance/1000)).bold()
                 }
-
+                
                 Section("Extra") {
-                    Picker("Difficulty", selection: $selectedDifficulty){
-                        ForEach(difficulties, id: \.self)  {
+                    Picker("Difficulty", selection: $selectedDifficulty) {
+                        ForEach(difficulties, id: \.self) {
                             Text($0)
                         }
                     }
-
-                    Picker("Type", selection: $selectedType){
-                        ForEach(types, id: \.self)  {
+                    
+                    Picker("Type", selection: $selectedType) {
+                        ForEach(types, id: \.self) {
                             Text($0)
                         }
                     }
@@ -73,7 +73,7 @@ struct AddRouteView: View {
                         Spacer()
                     }
                 }
-            
+                
             }
             .navigationTitle("Add Route")
             .toolbar {
@@ -89,7 +89,7 @@ struct AddRouteView: View {
     }
     
     func save() -> Void {
-        routesVM.addNewRoute(name: name,
+        dataVM.addNewRoute(name: name,
                              summary: description,
                              distance:recordVM.distance,
                              coordinates: recordVM.routeCoordinates,
@@ -117,9 +117,8 @@ struct AddRouteView: View {
 struct AddRouteView_Previews: PreviewProvider {
     static var previews: some View {
         let dc = DataController()
-        let vm = RoutesViewModel(dataController: dc)
         AddRouteView()
-            .environmentObject(vm)
+            .environmentObject(dc)
             .environmentObject(RecordViewModel(lm: LocationManager()))
     }
 }

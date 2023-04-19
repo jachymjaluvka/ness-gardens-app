@@ -8,11 +8,7 @@
 import SwiftUI
 
 struct RouteNavLinkView: View {
-    private var route: Route
-    
-    init(route: Route) {
-        self.route = route
-    }
+    var route: Route
     
     var body: some View {
         HStack(spacing: 10) {
@@ -43,7 +39,7 @@ struct RouteNavLinkView: View {
                             .foregroundColor(.blue)
                         Divider()
                     }
-                    Text("10 POIs")
+                    Text("\(route.pointsArray.count) POIs")
                 }
                 .font(.caption)
                 .frame(height: 10)

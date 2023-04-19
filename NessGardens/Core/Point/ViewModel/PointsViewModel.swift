@@ -24,7 +24,7 @@ class PointsViewModel: ObservableObject {
                             summary: String,
                             latitude: Float,
                             longitude: Float,
-                            routeId: UUID?
+                            route: Route?
     )-> Void {
         let newPoint = Point(context: dc.container.viewContext)
         newPoint.id = UUID()
@@ -32,7 +32,10 @@ class PointsViewModel: ObservableObject {
         newPoint.summary = summary
         newPoint.latitude = latitude
         newPoint.longitude = longitude
-        newPoint.routeId = routeId
+        newPoint.route = route
+        
+        route?.addToPoints(newPoint)
+    
         dc.save()
         allPoints = dc.fetchPoints()
     }
@@ -42,14 +45,16 @@ class PointsViewModel: ObservableObject {
                             summary: String,
                             latitude: Float,
                             longitude: Float,
-                            routeId: UUID?
+                            route: Route?
     ) -> Void {
         point.id = UUID()
         point.name = name
         point.summary = summary
         point.latitude = latitude
         point.longitude = longitude
-        point.routeId = routeId
+        
+        point.route?.removeFromPoints(point)
+        route?.addToPoints(point)
         dc.save()
         allPoints = dc.fetchPoints()
     }

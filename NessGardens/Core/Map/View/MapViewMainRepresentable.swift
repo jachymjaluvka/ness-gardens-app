@@ -13,7 +13,7 @@ struct MapViewMainRepresentable: UIViewRepresentable {
     let mapView = MKMapView()
     let locationManager = LocationManager()
     
-    @EnvironmentObject var routesViewModel: RoutesViewModel
+    @EnvironmentObject var dataVM: DataController
     
     func makeUIView(context: Context) -> some UIView {
         mapView.delegate = context.coordinator
@@ -25,8 +25,8 @@ struct MapViewMainRepresentable: UIViewRepresentable {
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
         
-        if routesViewModel.isRouteSelected {
-            guard let route = routesViewModel.selectedRoute else { return }
+        if dataVM.isRouteSelected {
+            guard let route = dataVM.selectedRoute else { return }
             context.coordinator.addPolyline(coordinates: route.wrappedCoordinates)
         } else {
             mapView.removeOverlays(mapView.overlays)

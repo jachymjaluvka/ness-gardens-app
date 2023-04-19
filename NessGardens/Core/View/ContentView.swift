@@ -43,7 +43,6 @@ struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         let dc = DataController()
         HomeView()
-            .environmentObject(RoutesViewModel(dataController: dc))
-            .environmentObject(PointsViewModel(dataController: dc))
+            .environmentObject(dc)
     }
 }
