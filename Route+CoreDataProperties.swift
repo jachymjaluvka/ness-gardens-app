@@ -17,34 +17,34 @@ extension Route {
         return NSFetchRequest<Route>(entityName: "Route")
     }
 
-    @NSManaged public var accessible: Bool
-    @NSManaged public var coordinates: [CLLocationCoordinate2D]?
-    @NSManaged public var difficulty: String?
-    @NSManaged public var distance: Double
     @NSManaged public var id: UUID?
     @NSManaged public var name: String?
     @NSManaged public var summary: String?
+    @NSManaged public var coordinates: [CLLocationCoordinate2D]?
+    @NSManaged public var accessible: Bool
+    @NSManaged public var distance: Double
     @NSManaged public var type: String?
+    @NSManaged public var difficulty: String?
     @NSManaged public var points: NSSet?
     
     public var wrappedName: String {
-        name ?? "No Route"
+        return name ?? ""
     }
-
+    
     public var wrappedSummary: String {
-        summary ?? "No Description"
+        return summary ?? ""
     }
-
+    
     public var wrappedCoordinates: [CLLocationCoordinate2D] {
-        coordinates ?? []
+        return coordinates ?? []
     }
-
-    public var wrappedType: String {
-        type ?? "Excercise"
+    
+    var typeEnum: RouteType {
+        return RouteType(rawValue: type ?? "Excercise") ?? .exercise
     }
-
-    public var wrappedDifficulty: String {
-        difficulty ?? "Easy"
+    
+    var difficultyEnum: RouteDifficulty {
+        return RouteDifficulty(rawValue: difficulty ?? "Medium") ?? .medium
     }
     
     public var pointsArray: [Point] {
@@ -75,11 +75,5 @@ extension Route {
 }
 
 extension Route : Identifiable {
-    func getTypeEnum() -> RouteType {
-        return RouteType(rawValue: self.wrappedType) ?? .exercise
-    }
-    
-    func getDifficultyEnum() -> RouteDifficulty {
-        return RouteDifficulty(rawValue: self.wrappedDifficulty) ?? .medium
-    }
+
 }

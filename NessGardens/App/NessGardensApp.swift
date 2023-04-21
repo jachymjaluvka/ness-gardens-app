@@ -14,6 +14,7 @@ struct NessGardensApp: App {
             HomeView()
                 .environmentObject(DataController())
                 .environmentObject(RecordViewModel(lm: LocationManager()))
+                .environment(\.managedObjectContext, DataController().container.viewContext)
         }
     }
 }

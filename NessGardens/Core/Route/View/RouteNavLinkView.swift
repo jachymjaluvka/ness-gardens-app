@@ -9,10 +9,13 @@ import SwiftUI
 
 struct RouteNavLinkView: View {
     var route: Route
+    var routePoints: [Point]
+    
+    @EnvironmentObject var dataVM: DataController
     
     var body: some View {
         HStack(spacing: 10) {
-            switch route.getTypeEnum() {
+            switch route.typeEnum {
             case .exercise:
                 Image(systemName: "figure.run")
                     .font(.title)
@@ -31,18 +34,19 @@ struct RouteNavLinkView: View {
                     .fixedSize(horizontal: false, vertical: true)
                     .font(.headline)
                 HStack {
-                    Text(route.wrappedDifficulty)
-                        .foregroundColor(.green)
+                    Text(route.difficultyEnum.rawValue)
+                        .foregroundColor(difficultyColour)
                     Divider()
                     if route.accessible {
                         Image(systemName: "figure.roll")
                             .foregroundColor(.blue)
                         Divider()
                     }
-                    Text("\(route.pointsArray.count) POIs")
+                    Text("\(routePoints.count) POIs")
                 }
                 .font(.caption)
                 .frame(height: 10)
+                .fixedSize(horizontal: false, vertical: true)
             }
             Spacer()
             Divider()
@@ -53,12 +57,24 @@ struct RouteNavLinkView: View {
         }
         .frame(height: 45)
     }
+    
+    var difficultyColour: Color {
+        switch route.difficultyEnum {
+        case .easy:
+            return Color.green
+        case .medium:
+            return Color.orange
+        case .hard:
+            return Color.red
+        }
+    }
 }
 
 struct RouteNavLinkView_Previews: PreviewProvider {
     static var previews: some View {
         let dc = DataController()
         let route = Route(context: dc.container.viewContext)
-        RouteNavLinkView(route: route)
+        RouteNavLinkView(route: route, routePoints: [])
+            .environmentObject(dc)
     }
 }

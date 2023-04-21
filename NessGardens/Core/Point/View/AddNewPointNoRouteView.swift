@@ -19,6 +19,10 @@ struct AddNewPointNoRouteView: View {
     @State private var longitute = ""
     @State private var latitude = ""
     
+    @State var showingPicker = false
+    @State var image: Image?
+    @State var inputImage: UIImage?
+    
     var body: some View {
         
         NavigationView {
@@ -29,6 +33,14 @@ struct AddNewPointNoRouteView: View {
                 
                 Section("Description") {
                     TextEditor(text: $description)
+                }
+                
+                image?
+                    .resizable()
+                    .frame(height: 200)
+                
+                Button("Choose Image") {
+                    showingPicker = true
                 }
                 
                 Section("Location"){
@@ -62,7 +74,12 @@ struct AddNewPointNoRouteView: View {
                     Button("Close", action: close)
                 }
             }
-            .onAppear()
+            .sheet(isPresented: $showingPicker){
+                ImagePicker(image: $inputImage)
+            }
+            .onChange(of: inputImage) { _ in
+                loadImage()
+            }
         }
     }
     
@@ -77,14 +94,21 @@ struct AddNewPointNoRouteView: View {
     
     func save() -> Void {
         dataVM.addNewPoint(name: name,
-                                    summary: description,
-                                    latitude: Float(latitude) ?? 0,
-                                    longitude: Float(longitute) ?? 0,
-                                    route: nil)
+                           summary: description,
+                           latitude: Float(latitude) ?? 0,
+                           longitude: Float(longitute) ?? 0,
+                           route: nil,
+                           image: inputImage?.pngData() ?? nil
+        )
         dismiss()
     }
     
     func reset() -> Void {
+    }
+    
+    func loadImage() -> Void {
+        guard let inputImage = inputImage else { return }
+        image = Image(uiImage: inputImage)
     }
 
 }

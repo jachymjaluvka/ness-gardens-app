@@ -1,38 +1,29 @@
 //
-//  EditPointView.swift
+//  MultiViewTestView.swift
 //  NessGardens
 //
-//  Created by Jachym Jaluvka on 13.04.2023.
+//  Created by Jachym Jaluvka on 19.04.2023.
 //
 
 import SwiftUI
+import PhotosUI
 
-struct EditPointView: View {
-    @Environment(\.dismiss) var dismiss
-    
-    public var point: Point
-    
-    @State private var name: String
-    @State private var description: String
-    @State private var longitute: String
-    @State private var latitude: String
+struct MultiViewTestView: View {
+    @State private var name = ""
+    @State private var description = ""
+    @State private var longitute = ""
+    @State private var latitude = ""
     
     @State var showingPicker = false
     @State var image: Image?
     @State var inputImage: UIImage?
     
     @EnvironmentObject var dataVM: DataController
-    @State var selectedRoute: Route?
+    @EnvironmentObject var recordVM: RecordViewModel
     @StateObject var locationManager = LocationManager()
+    @State private var selectedRoute: Route? = nil
     
-    init(point: Point) {
-        self.point = point
-        _name = State(initialValue: point.wrappedName)
-        _description = State(initialValue: point.wrappedSummary)
-        _latitude = State(initialValue: String(point.latitude))
-        _longitute = State(initialValue: String(point.longitude))
-        _selectedRoute = State(initialValue: point.route)
-    }
+    var showCurrentRouteOption: Bool
     
     var body: some View {
         
@@ -55,14 +46,18 @@ struct EditPointView: View {
                 }
                 
                 Section("Location"){
-                    TextField("Longitude", text: $longitute)
                     TextField("Latitude", text: $latitude)
+                    TextField("Longitude", text: $longitute)
                     Button("Use current location", action: useCurrentLocation)
                 }
                 
                 Section(header: Text("Route")) {
                     Picker(selection: $selectedRoute, label: Text("Routes")) {
-                        Text("No Route").tag(nil as Route?)
+                        if showCurrentRouteOption {
+                            Text("Current Route").tag(nil as Route?)
+                        } else {
+                            Text("No Route").tag(nil as Route?)
+                        }
                         ForEach(dataVM.allRoutes) { (route: Route) in
                             Text(route.wrappedName).tag(route as Route?)
                         }
@@ -82,10 +77,9 @@ struct EditPointView: View {
                         .tint(Color.gray)
                     Spacer()
                 }
-            
+                
             }
-            .navigationTitle("Edit - \(point.wrappedName)")
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle("Add Point")
             .toolbar {
                 ToolbarItem(placement: .automatic){
                     Button("Close", action: close)
@@ -106,53 +100,45 @@ struct EditPointView: View {
     }
     
     func close() -> Void {
-        dismiss()
     }
     
     func save() -> Void {
-        dataVM.updatePoint(point: point,
-                             name: name,
-                             summary: description,
-                             latitude: Float(latitude) ?? 0,
-                             longitude: Float(longitute) ?? 0,
-                             route: selectedRoute)
         
-        dismiss()
+        if showCurrentRouteOption && selectedRoute == nil{
+            let newPoint = Point(context: dataVM.container.viewContext)
+            newPoint.id = UUID()
+            newPoint.name = name
+            newPoint.summary = description
+            newPoint.latitude = Float(latitude) ?? 0
+            newPoint.longitude = Float(longitute) ?? 0
+            newPoint.route = selectedRoute
+            
+            recordVM.routePoints.append(newPoint)
+        } else {
+            dataVM.addNewPoint(name: name,
+                               summary: description,
+                               latitude: Float(latitude) ?? 0,
+                               longitude: Float(longitute) ?? 0,
+                               route: selectedRoute,
+                               image: inputImage?.pngData() ?? nil
+            )
+        }
     }
     
     func reset() -> Void {
-        name = point.wrappedName
-        description = point.wrappedSummary
-        
-        if let image = point.image {
-            inputImage = UIImage(data: image) ?? UIImage()
-            loadImage()
-        } else {
-            inputImage = nil
-            image = nil
-        }
-        
-        longitute = String(point.longitude)
-        latitude = String(point.latitude)
-        
-        selectedRoute = point.route
+        selectedRoute = nil
     }
     
     func loadImage() -> Void {
         guard let inputImage = inputImage else { return }
         image = Image(uiImage: inputImage)
     }
-
 }
 
-struct EditPOIView_Previews: PreviewProvider {
+struct MultiViewTestView_Previews: PreviewProvider {
     static var previews: some View {
-        let dc = DataController()
-        
-        let context = dc.container.viewContext
-        let testPoint = Point(context: context)
-        
-        EditPointView(point: testPoint)
-            .environmentObject(dc)
+        MultiViewTestView(showCurrentRouteOption: false)
+            .environmentObject(DataController())
+            .environmentObject(RecordViewModel(lm: LocationManager()))
     }
 }

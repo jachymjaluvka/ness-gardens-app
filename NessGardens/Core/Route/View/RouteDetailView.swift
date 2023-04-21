@@ -13,6 +13,11 @@ struct RouteDetailView: View {
     @Environment(\.dismiss) var dismiss
     
     var route: Route
+    var routePoints: [Point]
+    var minRowHeight: CGFloat = 70
+    
+    @State var selectedPoint: Point? = nil
+    @State var showingRouteEdit: Bool = false
     
     var body: some View {
         ScrollView {
@@ -20,13 +25,6 @@ struct RouteDetailView: View {
                 Text("Description")
                     .padding([.top, .leading, .trailing])
                     .font(.title3)
-                    .navigationTitle(route.wrappedName)
-                    .navigationBarTitleDisplayMode(.inline)
-                    .toolbar{
-                        ToolbarItem(placement: .automatic) {
-                            Button("Edit", action: edit)
-                        }
-                    }
                 Text(route.wrappedSummary)
                     .padding(.horizontal)
                 
@@ -44,9 +42,9 @@ struct RouteDetailView: View {
                         Divider()
                     }
                     VStack(alignment: .trailing, spacing: 5) {
-                        Text(route.wrappedType)
+                        Text(route.typeEnum.rawValue)
                         Divider()
-                        Text(route.wrappedDifficulty)
+                        Text(route.difficultyEnum.rawValue)
                         Divider()
                         Text(String(format: "%.3f km", route.distance/1000))
                         Divider()
@@ -58,30 +56,48 @@ struct RouteDetailView: View {
                     .padding([.top, .leading, .trailing])
                     .font(.headline)
                 
-                NavigationStack {
-                    List(route.pointsArray) { point in
-                        NavigationLink {
-                            PointDetailView(point: point)
-                        } label: {
-                            HStack {
-                                Text(point.wrappedName).bold()
+                if routePoints.count > 0 {
+                    NavigationView {
+                        List {
+                            ForEach(routePoints, id: \.self) { point in
+                                NavigationLink{
+                                    PointDetailView(point: point)
+                                } label: {
+                                    PointNavLinkView(point: point)
+                                        .frame(width: 400)
+                                }
                             }
                         }
-                    }
+                        .padding([.leading, .top], -35)
+                    }.frame(height: minRowHeight * CGFloat(routePoints.count))
+                } else {
+                    Text("No points of interest in this route.")
+                        .padding(.horizontal)
                 }
+
+                Divider()
                 
                 Text("Map")
                     .padding([.top, .leading, .trailing])
                     .font(.title3)
-                MapViewRouteRepresentable(route: route.wrappedCoordinates)
+                MapViewRouteRepresentable(route: route.wrappedCoordinates, points: routePoints)
                     .frame(height: 400)
-            
+                
                 HStack(spacing: 20) {
                     Spacer()
-                    Button("Select", action: select)
-                        .buttonStyle(.borderedProminent)
-                        .controlSize(.large)
-                        .fontWeight(.semibold)
+                    
+                    if route == dataVM.selectedRoute {
+                        Button("Stop Routing", action: deselect)
+                            .buttonStyle(.borderedProminent)
+                            .controlSize(.large)
+                            .fontWeight(.semibold)
+                            .tint(Color.orange)
+                    } else {
+                        Button("Select", action: select)
+                            .buttonStyle(.borderedProminent)
+                            .controlSize(.large)
+                            .fontWeight(.semibold)
+                    }
                     Button("Delete", role: .destructive, action: delete)
                         .buttonStyle(.borderedProminent)
                         .controlSize(.large)
@@ -90,15 +106,30 @@ struct RouteDetailView: View {
                 }
                 .padding(.top)
             }
+            .sheet(isPresented: $showingRouteEdit) {
+                RouteEditView(route: route)
+            }
         }
+        .navigationTitle(route.wrappedName)
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar{
+            ToolbarItem(placement: .automatic) {
+                Button("Edit", action: edit)
+            }
+        }
+
+    }
+    
+    func select() -> Void {
+        dataVM.selectRoute(route: route)
+    }
+    
+    func deselect() -> Void {
+        dataVM.deselectRoute()
     }
     
     func edit() {
-        
-    }
-    
-    func select() {
-        
+        showingRouteEdit = true
     }
     
     func delete() {
@@ -116,7 +147,7 @@ struct RouteDetailView_Previews: PreviewProvider {
         let context = dc.container.viewContext
         let testRoute = Route(context: context)
         
-        RouteDetailView(route: testRoute)
+        RouteDetailView(route: testRoute, routePoints: [])
             .environmentObject(dc)
     }
 }

@@ -5,6 +5,7 @@
 //  Created by Jachym Jaluvka on 17.02.2023.
 //
 
+import PhotosUI
 import SwiftUI
 
 struct AddNewPointView: View {
@@ -15,9 +16,16 @@ struct AddNewPointView: View {
     @State private var longitute = ""
     @State private var latitude = ""
     
+    @State var showingPicker = false
+    @State var image: Image?
+    @State var inputImage: UIImage?
+    
     @EnvironmentObject var dataVM: DataController
+    @EnvironmentObject var recordVM: RecordViewModel
     @StateObject var locationManager = LocationManager()
     @State private var selectedRoute: Route? = nil
+    
+    var showCurrentRouteOption: Bool
     
     var body: some View {
         
@@ -31,6 +39,14 @@ struct AddNewPointView: View {
                     TextEditor(text: $description)
                 }
                 
+                image?
+                    .resizable()
+                    .frame(height: 200)
+                
+                Button("Choose Image") {
+                    showingPicker = true
+                }
+                
                 Section("Location"){
                     TextField("Latitude", text: $latitude)
                     TextField("Longitude", text: $longitute)
@@ -39,7 +55,11 @@ struct AddNewPointView: View {
                 
                 Section(header: Text("Route")) {
                     Picker(selection: $selectedRoute, label: Text("Routes")) {
-                        Text("No Route").tag(nil as Route?)
+                        if showCurrentRouteOption {
+                            Text("Current Route").tag(nil as Route?)
+                        } else {
+                            Text("No Route").tag(nil as Route?)
+                        }
                         ForEach(dataVM.allRoutes) { (route: Route) in
                             Text(route.wrappedName).tag(route as Route?)
                         }
@@ -67,6 +87,12 @@ struct AddNewPointView: View {
                     Button("Close", action: close)
                 }
             }
+            .sheet(isPresented: $showingPicker){
+                ImagePicker(image: $inputImage)
+            }
+            .onChange(of: inputImage) { _ in
+                loadImage()
+            }
         }
     }
     
@@ -80,18 +106,38 @@ struct AddNewPointView: View {
     }
     
     func save() -> Void {
-        dataVM.addNewPoint(name: name,
-                                    summary: description,
-                                    latitude: Float(latitude) ?? 0,
-                                    longitude: Float(longitute) ?? 0,
-                                    route: selectedRoute)
         
-        print(selectedRoute?.wrappedName ?? "")
+        if showCurrentRouteOption && selectedRoute == nil{
+            let newPoint = Point(context: dataVM.container.viewContext)
+            newPoint.id = UUID()
+            newPoint.name = name
+            newPoint.summary = description
+            newPoint.latitude = Float(latitude) ?? 0
+            newPoint.longitude = Float(longitute) ?? 0
+            newPoint.route = selectedRoute
+            newPoint.image = inputImage?.pngData() ?? nil
+            
+            recordVM.routePoints.append(newPoint)
+        } else {
+            dataVM.addNewPoint(name: name,
+                               summary: description,
+                               latitude: Float(latitude) ?? 0,
+                               longitude: Float(longitute) ?? 0,
+                               route: selectedRoute,
+                               image: inputImage?.pngData() ?? nil
+            )
+        }
+        
         dismiss()
     }
     
     func reset() -> Void {
         selectedRoute = nil
+    }
+    
+    func loadImage() -> Void {
+        guard let inputImage = inputImage else { return }
+        image = Image(uiImage: inputImage)
     }
 
 }
@@ -99,7 +145,8 @@ struct AddNewPointView: View {
 struct AddNewPOIView_Previews: PreviewProvider {
     static var previews: some View {
         let dc = DataController()
-        AddNewPointView()
+        AddNewPointView(showCurrentRouteOption: false)
             .environmentObject(dc)
+            .environmentObject(RecordViewModel(lm: LocationManager()))
     }
 }

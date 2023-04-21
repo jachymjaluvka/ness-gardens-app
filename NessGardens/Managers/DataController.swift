@@ -17,10 +17,15 @@ class DataController: ObservableObject {
     @Published var filteredRoutes: [Route] = []
     @Published var isRouteSelected: Bool = false
     @Published var selectedRoute: Route? = nil
+    @Published var routeFilterOptions: RouteFilterOptions = RouteFilterOptions()
+    
     
     // Points
     @Published var allPoints: [Point] = []
     @Published var filteredPoints: [Point] = []
+    
+    // Countries
+    @Published var allCountries: [Country] = []
     
     init() {
         container.loadPersistentStores { description, error in
@@ -35,9 +40,12 @@ class DataController: ObservableObject {
         
         allRoutes = fetchRoutes()
         filteredRoutes = fetchRoutes()
+        sortRoutes(by: .name)
         
         allPoints = fetchPoints()
         filteredPoints = fetchPoints()
+        
+        allCountries = fetchCountries()
     }
     
     // MARK: Route Functions
@@ -61,7 +69,8 @@ class DataController: ObservableObject {
                             coordinates: [CLLocationCoordinate2D],
                             type: String,
                             difficulty: String,
-                            accessible: Bool
+                            accessible: Bool,
+                            routePoints: [Point] = []
     ) -> Void {
         let newRoute = Route(context: container.viewContext)
         newRoute.id = UUID()
@@ -72,6 +81,10 @@ class DataController: ObservableObject {
         newRoute.type = type
         newRoute.difficulty = difficulty
         newRoute.accessible = accessible
+        
+        for point in routePoints {
+            point.route = newRoute
+        }
         
         save()
     }
@@ -102,6 +115,37 @@ class DataController: ObservableObject {
         save()
     }
     
+    public func selectRoute(route: Route) -> Void {
+        isRouteSelected = true
+        selectedRoute = route
+    }
+    
+    public func deselectRoute() -> Void {
+        isRouteSelected = false
+        selectedRoute = nil
+    }
+    
+    public func filterRoutes(options: RouteFilterOptions) -> Void {
+        routeFilterOptions = options
+        
+        filteredRoutes = allRoutes.filter({ route in
+            routeFilterOptions.doesRouteConform(route: route)
+        })
+    }
+    
+    public func sortRoutes(by: RouteSortOption) -> Void {
+        filteredRoutes = filteredRoutes.sorted { route1, route2 in
+            switch by {
+            case .name:
+                return route1.wrappedName < route2.wrappedName
+            case .distance:
+                return route1.distance < route2.distance
+            case .points:
+                return route1.pointsArray.count < route2.pointsArray.count
+            }
+        }
+    }
+    
     
     // MARK: Point functions
     
@@ -122,7 +166,8 @@ class DataController: ObservableObject {
                             summary: String,
                             latitude: Float,
                             longitude: Float,
-                            route: Route?
+                            route: Route?,
+                            image: Data? = nil
     )-> Void {
         let newPoint = Point(context: container.viewContext)
         newPoint.id = UUID()
@@ -131,6 +176,10 @@ class DataController: ObservableObject {
         newPoint.latitude = latitude
         newPoint.longitude = longitude
         newPoint.route = route
+        
+        if let i = image {
+            newPoint.image = image
+        }
     
         save()
     }
@@ -158,6 +207,8 @@ class DataController: ObservableObject {
         allPoints = fetchPoints()
     }
     
+    // MARK: Save function
+    
     func save() -> Void {
         if container.viewContext.hasChanges{
             do {
@@ -168,6 +219,10 @@ class DataController: ObservableObject {
             
             allRoutes = fetchRoutes()
             allPoints = fetchPoints()
+            allCountries = fetchCountries()
+            
+            filteredRoutes = allRoutes
+            sortRoutes(by: .name)
         }
     }
     
@@ -185,4 +240,19 @@ class DataController: ObservableObject {
         }
         return fetchedPoints
     }
+    
+    // MARK: Country
+    func fetchCountries() -> [Country] {
+        let request = NSFetchRequest<Country>(entityName: "Country")
+        
+        do {
+            let results = try container.viewContext.fetch(request)
+            return results
+        } catch let error {
+            print("Error fetching. \(error.localizedDescription)")
+        }
+        
+        return []
+    }
+    
 }

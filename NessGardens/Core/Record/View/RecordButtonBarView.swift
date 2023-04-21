@@ -9,13 +9,16 @@ import SwiftUI
 
 struct RecordButtonBarView: View {
     @State var showingAddRoute = false
+    @State var showingAddPoint = false
     @EnvironmentObject var recordVM: RecordViewModel
+    
+    @State private var showPauseButton: Bool = false
     
     var body: some View {
         HStack {
             Spacer()
             
-            Button(action: placeholder) {
+            Button(action: addPoint) {
                 VStack {
                     Image(systemName: "mappin.and.ellipse")
                         .resizable()
@@ -27,7 +30,7 @@ struct RecordButtonBarView: View {
 
             }.frame(width: 100, height: 50)
             
-            if recordVM.recording {
+            if showPauseButton {
                 Button(action: pauseRecording) {
                     VStack {
                         Image(systemName: "pause.fill")
@@ -69,10 +72,13 @@ struct RecordButtonBarView: View {
         }.sheet(isPresented: $showingAddRoute) {
             AddRouteView()
         }
+        .sheet(isPresented: $showingAddPoint) {
+            AddNewPointView(showCurrentRouteOption: true)
+        }
     }
     
-    func placeholder() -> Void {
-        
+    func addPoint() -> Void {
+        showingAddPoint = true
     }
     
     func stop() -> Void {
@@ -83,10 +89,12 @@ struct RecordButtonBarView: View {
     }
     
     func startRecording() -> Void {
+        showPauseButton.toggle()
         recordVM.startTimer()
     }
     
     func pauseRecording() -> Void {
+        showPauseButton.toggle()
         recordVM.stopTimer()
     }
 }
@@ -95,5 +103,6 @@ struct RecordButtonBarView_Previews: PreviewProvider {
     static var previews: some View {
         RecordButtonBarView()
             .environmentObject(RecordViewModel(lm: LocationManager()))
+            .environmentObject(DataController())
     }
 }

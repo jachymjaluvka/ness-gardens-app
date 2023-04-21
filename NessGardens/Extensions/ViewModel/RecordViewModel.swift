@@ -52,7 +52,6 @@ class RecordViewModel: ObservableObject {
     }
     
     public func stopTimer() -> Void {
-        recording = false
         timer?.cancel()
     }
     
@@ -63,6 +62,7 @@ class RecordViewModel: ObservableObject {
         routePoints = []
         coordinateID = 0
         distance = 0
+        recording = false
     }
     
     public func formatSeconds() -> Void {

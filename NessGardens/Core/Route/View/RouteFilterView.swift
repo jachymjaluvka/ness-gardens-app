@@ -9,15 +9,26 @@ import SwiftUI
 
 struct RouteFilterView: View {
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var dataVM: DataController
     
-    @State var name = ""
-    @State var minDistance = ""
-    @State var maxDistance = ""
-    @State var selectedDifficulty = "Easy"
-    @State var selectedType = "Excercise"
+    @State var name: String
+    @State var minDistance: String
+    @State var maxDistance: String
+    @State var selectedDifficulty: String
+    @State var selectedType: String
+    @State var accessible: Bool
     
-    let difficulties = ["Easy", "Medium", "Hard"]
-    let types = ["Excercise", "Informative", "Exploration", "Leisure"]
+    init(options: RouteFilterOptions) {
+        _name = State(initialValue: options.name)
+        _minDistance = State(initialValue: String(options.minDistance))
+        _maxDistance = State(initialValue: String(options.maxDistance))
+        _selectedDifficulty = State(initialValue: options.difficulty)
+        _selectedType = State(initialValue: options.type)
+        _accessible = State(initialValue: options.accessible)
+    }
+    
+    let difficulties = ["All", "Easy", "Medium", "Hard"]
+    let types = ["All", "Excercise", "Informative", "Exploration", "Leisure"]
     
     var body: some View {
         Form {
@@ -33,21 +44,24 @@ struct RouteFilterView: View {
                     TextField("Max Distance", text: $maxDistance)
                 }
             }
-            
-            Picker("Difficulty", selection: $selectedDifficulty){
-                ForEach(difficulties, id: \.self)  {
-                    Text($0)
+            Section("Extra") {
+                Picker("Difficulty", selection: $selectedDifficulty){
+                    ForEach(difficulties, id: \.self)  {
+                        Text($0)
+                    }
+                }
+                
+                Picker("Type", selection: $selectedType){
+                    ForEach(types, id: \.self)  {
+                        Text($0)
+                    }
+                }
+                
+                Toggle(isOn: $accessible) {
+                    Text("Accessible")
                 }
             }
-            .pickerStyle(.inline)
-            
-            Picker("Type", selection: $selectedType){
-                ForEach(types, id: \.self)  {
-                    Text($0)
-                }
-            }
-            .pickerStyle(.inline)
-            
+
             HStack {
                 Spacer()
                 Button("Filter", action: filter)
@@ -66,16 +80,34 @@ struct RouteFilterView: View {
     }
     
     func filter() -> Void {
+        let options = RouteFilterOptions(name: name,
+                                         minDistance: Double(minDistance) ?? 0,
+                                         maxDistance: Double(maxDistance) ?? 100,
+                                         difficulty: selectedDifficulty,
+                                         type: selectedType,
+                                         accessible: accessible
+        )
+        
+        dataVM.filterRoutes(options: options)
         dismiss()
     }
     
     func reset() -> Void {
+        name = ""
+        minDistance = "0"
+        maxDistance = "100"
+        selectedDifficulty = "All"
+        selectedType = "All"
+        accessible = false
         
+        dataVM.filteredRoutes = dataVM.allRoutes
+        dataVM.sortRoutes(by: .name)
     }
 }
 
 struct RouteFilterView_Previews: PreviewProvider {
     static var previews: some View {
-        RouteFilterView()
+        RouteFilterView(options: RouteFilterOptions())
+            .environmentObject(DataController())
     }
 }

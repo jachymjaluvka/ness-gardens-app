@@ -12,29 +12,43 @@ struct RoutesView: View {
     @EnvironmentObject var dataVM: DataController
     
     @State private var showingFilter = false
+    @State var sortedBy: RouteSortOption = .name
     
     var body: some View {
         NavigationStack {
-            List(dataVM.allRoutes) { route in
+            List(dataVM.filteredRoutes) { route in
                 NavigationLink {
-                    RouteDetailView(route: route)
+                    RouteDetailView(route: route, routePoints: route.pointsArray)
                 } label: {
-                    RouteNavLinkView(route: route)
+                    RouteNavLinkView(route: route, routePoints: route.pointsArray)
                 }
             }
             .navigationTitle("Routes")
             .toolbar {
-                ToolbarItem(placement: .automatic) {
+                ToolbarItem(placement: .navigationBarLeading) {
                     Button("Filter") {
                         showingFilter.toggle()
                     }
                 }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Picker("Sort by: ", selection: $sortedBy.onChange(sortRoutes)) {
+                        ForEach(RouteSortOption.allCases, id: \.self) { option in
+                            Text("Sorted by: " + String(describing: option))
+                        }
+                    }.pickerStyle(.automatic)
+                    
+                }
             }
         }
         .sheet(isPresented: $showingFilter) {
-            RouteFilterView()
+            RouteFilterView(options: dataVM.routeFilterOptions)
         }
 
+    }
+    
+    func sortRoutes(to value: RouteSortOption) -> Void {
+        dataVM.sortRoutes(by: sortedBy)
     }
 }
 

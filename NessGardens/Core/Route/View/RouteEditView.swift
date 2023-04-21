@@ -1,23 +1,33 @@
 //
-//  AddRouteView.swift
+//  RouteEditView.swift
 //  NessGardens
 //
-//  Created by Jachym Jaluvka on 14.04.2023.
+//  Created by Jachym Jaluvka on 20.04.2023.
 //
 
 import SwiftUI
-import MapKit
+import CoreLocation
 
-struct AddRouteView: View {
+struct RouteEditView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var dataVM: DataController
-    @EnvironmentObject var recordVM: RecordViewModel
     
-    @State var name: String = ""
-    @State var description: String = ""
-    @State var selectedDifficulty = "Easy"
-    @State var selectedType = "Excercise"
-    @State var accessible = false
+    @State var name: String
+    @State var description: String
+    @State var selectedDifficulty: String
+    @State var selectedType: String
+    @State var accessible: Bool
+    
+    var route: Route
+    
+    init(route: Route) {
+        _name = State(initialValue: route.wrappedName)
+        _description = State(initialValue: route.wrappedSummary)
+        _selectedDifficulty = State(initialValue: route.difficulty ?? "Easy")
+        _selectedType = State(initialValue: route.type ?? "Excercise")
+        _accessible = State(initialValue: route.accessible)
+        self.route = route
+    }
     
     let difficulties = ["Easy", "Medium", "Hard"]
     let types = ["Excercise", "Informative", "Exploration", "Leisure"]
@@ -34,9 +44,9 @@ struct AddRouteView: View {
                 }
                 
                 Section ("Map") {
-                    MapViewRouteRepresentable(route: recordVM.routeCoordinates, points: recordVM.routePoints)
+                    MapViewRouteRepresentable(route: route.wrappedCoordinates, points: route.pointsArray)
                         .frame(height: 250)
-                    Text(String(format: "Distance: %.3f km", recordVM.distance/1000)).bold()
+                    Text(String(format: "Distance: %.3f km", route.distance/1000)).bold()
                 }
                 
                 Section("Extra") {
@@ -58,15 +68,7 @@ struct AddRouteView: View {
                 }
                 
                 Section("Points") {
-                    if recordVM.routePoints.count > 0 {
-                        List {
-                            ForEach(recordVM.routePoints, id: \.self) { point in
-                                PointNavLinkView(point: point)
-                            }
-                        }
-                    } else {
-                        Text("No points of interest in this route.")
-                    }
+                    Divider()
                     HStack {
                         Spacer()
                         Button("Save", action: save)
@@ -83,7 +85,7 @@ struct AddRouteView: View {
                 }
                 
             }
-            .navigationTitle("Add Route")
+            .navigationTitle("Update Route")
             .toolbar {
                 ToolbarItem(placement: .automatic){
                     Button("Close", action: close)
@@ -97,25 +99,25 @@ struct AddRouteView: View {
     }
     
     func save() -> Void {
-        dataVM.addNewRoute(name: name,
+        dataVM.updateRoute(route: route,
+                           name: name,
                            summary: description,
-                           distance:recordVM.distance,
-                           coordinates: recordVM.routeCoordinates,
+                           distance:route.distance,
+                           coordinates: route.wrappedCoordinates,
                            type: selectedType,
                            difficulty: selectedDifficulty,
-                           accessible: accessible,
-                           routePoints: recordVM.routePoints
+                           accessible: accessible
         )
         
-        recordVM.endRecording()
         dismiss()
     }
     
     func reset() -> Void {
-        name = ""
-        description = ""
-        selectedDifficulty = "Easy"
-        selectedType = "Excercise"
+        name = route.wrappedName
+        description = route.wrappedSummary
+        selectedDifficulty = route.difficulty ?? "Easy"
+        selectedType = route.type ?? "Excercise"
+        accessible = route.accessible
     }
     
     func formatCoordinate(coord: CLLocationCoordinate2D?) -> Float {
@@ -123,11 +125,14 @@ struct AddRouteView: View {
     }
 }
 
-struct AddRouteView_Previews: PreviewProvider {
+struct RouteEditView_Previews: PreviewProvider {
     static var previews: some View {
         let dc = DataController()
-        AddRouteView()
+        
+        let context = dc.container.viewContext
+        let testRoute = Route(context: context)
+        
+        RouteEditView(route: testRoute)
             .environmentObject(dc)
-            .environmentObject(RecordViewModel(lm: LocationManager()))
     }
 }

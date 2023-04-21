@@ -11,21 +11,20 @@ struct PointsView: View {
     @State private var showingAddPOI = false
     @EnvironmentObject var dataVM: DataController
     @State var showAlert: Bool = false
+    @State var queryString = ""
     
     var body: some View {
         
-        NavigationStack {
+        NavigationView {
             if dataVM.allPoints.count > 0 {
-                List(dataVM.allPoints) { point in
+                List(searchResults) { point in
                     NavigationLink {
                         PointDetailView(point: point)
                     } label: {
-                        HStack {
-                            Text(point.wrappedName).bold()
-                        }
+                        PointNavLinkView(point: point)
                     }
                 }
-                .navigationTitle("Points of Interest")
+                .navigationTitle("POIs")
                 .toolbar {
                     ToolbarItem(placement: .automatic) {
                         Image(systemName: "plus")
@@ -39,7 +38,7 @@ struct PointsView: View {
             } else {
                 Text("No points of interest.")
                     .padding(.top)
-                    .navigationTitle("Points of Interest")
+                    .navigationTitle("POIs")
                     .toolbar {
                         ToolbarItem(placement: .automatic) {
                             Image(systemName: "plus")
@@ -54,9 +53,10 @@ struct PointsView: View {
             }
             
         }
+        .searchable(text: $queryString)
         .sheet(isPresented: $showingAddPOI) {
             if dataVM.allRoutes.count > 0 {
-                AddNewPointView()
+                AddNewPointView(showCurrentRouteOption: false)
             } else {
                 AddNewPointNoRouteView()
             }
@@ -65,6 +65,14 @@ struct PointsView: View {
     
     func close() {
         showAlert = false
+    }
+    
+    var searchResults: [Point] {
+        if queryString.isEmpty {
+            return dataVM.allPoints
+        } else {
+            return dataVM.allPoints.filter { $0.wrappedName.contains(queryString) }
+        }
     }
     
 }

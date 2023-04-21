@@ -19,12 +19,22 @@ struct MapViewRecordRepresentable: UIViewRepresentable {
         mapView.delegate = context.coordinator
         mapView.isRotateEnabled = false
         mapView.showsUserLocation = true
+        mapView.userTrackingMode = .none
         
         return mapView
     }
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
+        
+        self.mapView.removeOverlays(self.mapView.overlays)
+        self.mapView.removeAnnotations(self.mapView.annotations)
+        
         context.coordinator.addPolyline(coordinates: recordViewModel.routeCoordinates)
+        
+        for point in recordViewModel.routePoints {
+            context.coordinator.addAnnotation(withCoordinate: point.coordinates, title: point.wrappedName)
+        }
+        
     }
     
     func makeCoordinator() -> MapCoordinator {
@@ -35,7 +45,7 @@ struct MapViewRecordRepresentable: UIViewRepresentable {
 extension MapViewRecordRepresentable {
     
     class MapCoordinator: NSObject, MKMapViewDelegate {
-        let parent: MapViewRecordRepresentable
+        var parent: MapViewRecordRepresentable
         
         init(parent: MapViewRecordRepresentable) {
             self.parent = parent
@@ -43,13 +53,32 @@ extension MapViewRecordRepresentable {
         }
         
         func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+            
+            let span = parent.mapView.region.span
+            
+            var longitudeDelta = 0.01
+            if span.longitudeDelta < 0.5 {
+                longitudeDelta = span.longitudeDelta
+            }
+            
+            var latitudeDelta = 0.01
+            if span.latitudeDelta < 0.5 {
+                latitudeDelta = span.latitudeDelta
+            }
+            
             let region = MKCoordinateRegion(
                 center: CLLocationCoordinate2D(latitude: userLocation.coordinate.latitude,
                                                longitude: userLocation.coordinate.longitude),
-                span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+                span: MKCoordinateSpan(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta)
             )
             
+            if !parent.recordViewModel.recording {
+                parent.mapView.removeAnnotations(parent.mapView.annotations)
+                parent.mapView.removeOverlays(parent.mapView.overlays)
+            }
+            
             parent.mapView.setRegion(region, animated: true)
+
         }
         
         func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
@@ -65,17 +94,13 @@ extension MapViewRecordRepresentable {
             parent.mapView.addOverlay(polyline)
         }
         
-        func addAndSelectAnnotation(withCoordinate coordinate: CLLocationCoordinate2D) {
-            parent.mapView.removeAnnotations(parent.mapView.annotations)
+        func addAnnotation(withCoordinate coordinate: CLLocationCoordinate2D, title: String) {
             
             let anno = MKPointAnnotation()
             anno.coordinate = coordinate
+            anno.title = title
             parent.mapView.addAnnotation(anno)
-            parent.mapView.selectAnnotation(anno, animated: true)
-            
-            parent.mapView.showAnnotations(parent.mapView.annotations, animated: true)
         }
-        
         
     }
 }

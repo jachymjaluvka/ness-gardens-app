@@ -14,8 +14,10 @@ struct HomeView: View {
             RoutesView()
                 .tabItem{
                     Label("Routes", systemImage: "figure.walk")
-                }.tag("routes")
-            
+                }
+                .tag("routes")
+                .padding(.bottom)
+                   
             MapView()
                 .tabItem {
                     Label("Map", systemImage: "map")
@@ -30,10 +32,11 @@ struct HomeView: View {
                 .tabItem {
                     Label("POIs", systemImage: "star")
                 }.tag("poi")
+                .padding(.bottom)
             
-            TimerPlayground()
+            MultiViewTestView(showCurrentRouteOption: false)
                 .tabItem {
-                    Label("Timer", systemImage: "slider.horizontal.3")
+                    Label("Test", systemImage: "slider.horizontal.3")
                 }.tag("timer")
         }
     }

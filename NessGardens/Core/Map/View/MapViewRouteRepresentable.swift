@@ -13,6 +13,7 @@ struct MapViewRouteRepresentable: UIViewRepresentable {
     let mapView = MKMapView()
     let locationManager = LocationManager()
     let route: [CLLocationCoordinate2D]
+    let points: [Point]
     
     func makeUIView(context: Context) -> some UIView {
         mapView.delegate = context.coordinator
@@ -28,11 +29,22 @@ struct MapViewRouteRepresentable: UIViewRepresentable {
         
         context.coordinator.addPolyline(coordinates: route)
         
+        for point in points {
+            context.coordinator.addAnnotation(withCoordinate: point.coordinates, title: point.wrappedName)
+        }
+        
+        if route.count > 0 {
+            context.coordinator.addAnnotation(withCoordinate: route.first!, title: "Start")
+            context.coordinator.addAnnotation(withCoordinate: route.last!, title: "End")
+        }
+        
+        mapView.showAnnotations(mapView.annotations, animated: true)
+        
         return mapView
     }
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
-        context.coordinator.addPolyline(coordinates: route)
+
     }
     
     func makeCoordinator() -> MapCoordinator {
@@ -63,15 +75,11 @@ extension MapViewRouteRepresentable {
             parent.mapView.addOverlay(polyline)
         }
         
-        func addAndSelectAnnotation(withCoordinate coordinate: CLLocationCoordinate2D) {
-            parent.mapView.removeAnnotations(parent.mapView.annotations)
-            
+        func addAnnotation(withCoordinate coordinate: CLLocationCoordinate2D, title: String) {
             let anno = MKPointAnnotation()
             anno.coordinate = coordinate
+            anno.title = title
             parent.mapView.addAnnotation(anno)
-            parent.mapView.selectAnnotation(anno, animated: true)
-            
-            parent.mapView.showAnnotations(parent.mapView.annotations, animated: true)
         }
         
         

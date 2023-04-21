@@ -14,46 +14,62 @@ struct PointDetailView: View {
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            
-            Text(point.wrappedName)
-                .font(.title)
-                .fontWeight(.semibold)
-                .padding(.horizontal)
-            
-            Text(point.wrappedSummary)
-                .fontWeight(.semibold)
-                .padding(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/)
+        ScrollView {
+            VStack(alignment: .leading, spacing: 10) {
                 
+                Text("Description")
+                    .font(.title3)
+                Text(point.wrappedSummary)
                 
-            
-            HStack {
-                Text("Latitude: \(point.latitude)")
-                    .font(.footnote)
-                Text("Longitude: \(point.longitude)")
-                    .font(.footnote)
-            }.padding(.horizontal)
-            
-            
-            Spacer()
-            
-            HStack(alignment: .center){
+                Divider()
+                
+                if let image = point.image {
+                    Text("Image")
+                        .font(.title3)
+                    Image(uiImage: UIImage(data: image) ?? UIImage())
+                        .resizable()
+                        .frame(height: 250)
+                }
+                
+                Divider()
+                
+                Text("Map")
+                    .font(.title3)
+                MapViewRouteRepresentable(route: [], points: [point])
+                    .frame(height: 250)
+                
+                HStack {
+                    Text("Latitude: \(point.latitude)")
+                        .font(.footnote)
+                    Spacer()
+                    Text("Longitude: \(point.longitude)")
+                        .font(.footnote)
+                }
+                
                 Spacer()
-                Button("Edit", role: .none, action: edit)
-                    .buttonStyle(.borderedProminent)
-                    .controlSize(.large)
-                    .fontWeight(.semibold)
                 
-                Button("Delete", role: .destructive, action: delete)
-                    .buttonStyle(.borderedProminent)
-                    .controlSize(.large)
-                    .fontWeight(.semibold)
-                Spacer()
+                HStack(alignment: .center){
+                    Spacer()
+                    
+                    Button("Delete", role: .destructive, action: delete)
+                        .buttonStyle(.borderedProminent)
+                        .controlSize(.large)
+                        .fontWeight(.semibold)
+                    Spacer()
+                }
+                .padding(/*@START_MENU_TOKEN@*/[.top, .leading, .trailing]/*@END_MENU_TOKEN@*/)
+                .sheet(isPresented: $showingEdit) {
+                    EditPointView(point: point)
+                }
+                .toolbar {
+                    ToolbarItem(placement: .automatic) {
+                        Button("Edit", role: .none, action: edit)
+                    }
+                }
+                .navigationTitle(point.wrappedName)
+                .navigationBarTitleDisplayMode(.inline)
             }
-            .padding(/*@START_MENU_TOKEN@*/[.top, .leading, .trailing]/*@END_MENU_TOKEN@*/)
-            .sheet(isPresented: $showingEdit) {
-                EditPointView(point: point)
-            }
+            .padding(.horizontal)
         }
     }
     
